@@ -1,0 +1,260 @@
+{
+    "Registered Services": {
+        "1": {
+            "Service name": "cp-nano-http-transaction-handler",
+            "Service ID": "1",
+            "Service port": 12000,
+            "Relevant configs": [
+                "snort",
+                "rules",
+                "parameters",
+                "zones",
+                "waap",
+                "triggers",
+                "ips",
+                "agentGeoDb",
+                "activeContextConfig",
+                "exceptions",
+                "agent-intelligence",
+                "accessControlV2"
+            ]
+        },
+        "10": {
+            "Service name": "cp-nano-http-transaction-handler",
+            "Service ID": "10",
+            "Service port": 12009,
+            "Relevant configs": [
+                "snort",
+                "rules",
+                "parameters",
+                "zones",
+                "waap",
+                "triggers",
+                "ips",
+                "agentGeoDb",
+                "activeContextConfig",
+                "exceptions",
+                "agent-intelligence",
+                "accessControlV2"
+            ]
+        },
+        "11": {
+            "Service name": "cp-nano-http-transaction-handler",
+            "Service ID": "11",
+            "Service port": 12010,
+            "Relevant configs": [
+                "snort",
+                "rules",
+                "parameters",
+                "zones",
+                "waap",
+                "triggers",
+                "ips",
+                "agentGeoDb",
+                "activeContextConfig",
+                "exceptions",
+                "agent-intelligence",
+                "accessControlV2"
+            ]
+        },
+        "12": {
+            "Service name": "cp-nano-http-transaction-handler",
+            "Service ID": "12",
+            "Service port": 12011,
+            "Relevant configs": [
+                "snort",
+                "rules",
+                "parameters",
+                "zones",
+                "waap",
+                "triggers",
+                "ips",
+                "agentGeoDb",
+                "activeContextConfig",
+                "exceptions",
+                "agent-intelligence",
+                "accessControlV2"
+            ]
+        },
+        "2": {
+            "Service name": "cp-nano-http-transaction-handler",
+            "Service ID": "2",
+            "Service port": 12001,
+            "Relevant configs": [
+                "snort",
+                "rules",
+                "parameters",
+                "zones",
+                "waap",
+                "triggers",
+                "ips",
+                "agentGeoDb",
+                "activeContextConfig",
+                "exceptions",
+                "agent-intelligence",
+                "accessControlV2"
+            ]
+        },
+        "3": {
+            "Service name": "cp-nano-http-transaction-handler",
+            "Service ID": "3",
+            "Service port": 12002,
+            "Relevant configs": [
+                "snort",
+                "rules",
+                "parameters",
+                "zones",
+                "waap",
+                "triggers",
+                "ips",
+                "agentGeoDb",
+                "activeContextConfig",
+                "exceptions",
+                "agent-intelligence",
+                "accessControlV2"
+            ]
+        },
+        "4": {
+            "Service name": "cp-nano-http-transaction-handler",
+            "Service ID": "4",
+            "Service port": 12003,
+            "Relevant configs": [
+                "snort",
+                "rules",
+                "parameters",
+                "zones",
+                "waap",
+                "triggers",
+                "ips",
+                "agentGeoDb",
+                "activeContextConfig",
+                "exceptions",
+                "agent-intelligence",
+                "accessControlV2"
+            ]
+        },
+        "5": {
+            "Service name": "cp-nano-http-transaction-handler",
+            "Service ID": "5",
+            "Service port": 12004,
+            "Relevant configs": [
+                "snort",
+                "rules",
+                "parameters",
+                "zones",
+                "waap",
+                "triggers",
+                "ips",
+                "agentGeoDb",
+                "activeContextConfig",
+                "exceptions",
+                "agent-intelligence",
+                "accessControlV2"
+            ]
+        },
+        "6": {
+            "Service name": "cp-nano-http-transaction-handler",
+            "Service ID": "6",
+            "Service port": 12005,
+            "Relevant configs": [
+                "snort",
+                "rules",
+                "parameters",
+                "zones",
+                "waap",
+                "triggers",
+                "ips",
+                "agentGeoDb",
+                "activeContextConfig",
+                "exceptions",
+                "agent-intelligence",
+                "accessControlV2"
+            ]
+        },
+        "7": {
+            "Service name": "cp-nano-http-transaction-handler",
+            "Service ID": "7",
+            "Service port": 12006,
+            "Relevant configs": [
+                "snort",
+                "rules",
+                "parameters",
+                "zones",
+                "waap",
+                "triggers",
+                "ips",
+                "agentGeoDb",
+                "activeContextConfig",
+                "exceptions",
+                "agent-intelligence",
+                "accessControlV2"
+            ]
+        },
+        "8": {
+            "Service name": "cp-nano-http-transaction-handler",
+            "Service ID": "8",
+            "Service port": 12007,
+            "Relevant configs": [
+                "snort",
+                "rules",
+                "parameters",
+                "zones",
+                "waap",
+                "triggers",
+                "ips",
+                "agentGeoDb",
+                "activeContextConfig",
+                "exceptions",
+                "agent-intelligence",
+                "accessControlV2"
+            ]
+        },
+        "9": {
+            "Service name": "cp-nano-http-transaction-handler",
+            "Service ID": "9",
+            "Service port": 12008,
+            "Relevant configs": [
+                "snort",
+                "rules",
+                "parameters",
+                "zones",
+                "waap",
+                "triggers",
+                "ips",
+                "agentGeoDb",
+                "activeContextConfig",
+                "exceptions",
+                "agent-intelligence",
+                "accessControlV2"
+            ]
+        },
+        "cp-nano-attachment-registrator": {
+            "Service name": "cp-nano-attachment-registrator",
+            "Service ID": "cp-nano-attachment-registrator",
+            "Service port": 8124,
+            "Relevant configs": [
+                "zones",
+                "triggers",
+                "rules",
+                "parameters",
+                "exceptions",
+                "agent-intelligence"
+            ]
+        },
+        "cp-nano-orchestration": {
+            "Service name": "cp-nano-orchestration",
+            "Service ID": "cp-nano-orchestration",
+            "Service port": 7777,
+            "Relevant configs": [
+                "zones",
+                "triggers",
+                "rules",
+                "registration-data",
+                "parameters",
+                "orchestration",
+                "exceptions",
+                "agent-intelligence"
+            ]
+        }
+    }
+}

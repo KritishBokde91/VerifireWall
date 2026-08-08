@@ -1,0 +1,8 @@
+Starting installation of Check Point Cache service [Fri Aug  7 17:46:05 UTC 2026]
+
+Installation completed successfully.
+Starting installation of Check Point Cache service [Sat Aug  8 03:09:20 UTC 2026]
+
+Unregistering /etc/cp/agentCache/cp-nano-agent-cache (pid=649)
+sh: can't kill pid 649: No such process
+Installation completed successfully.

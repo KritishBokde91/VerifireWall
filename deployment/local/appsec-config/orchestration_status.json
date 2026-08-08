@@ -1,0 +1,32 @@
+{
+    "Last update attempt": "2026-08-08T08:22:13.260843",
+    "Last update status": "Succeeded ",
+    "Last update": "2026-08-08T08:22:13.278337",
+    "Last manifest update": "2026-08-08T03:10:39.775040",
+    "Policy version": "b347da898fe401e3e85e6af4ecfa03702e9f43dbde941e5f4bf1e0ce9489a125",
+    "Last policy update": "2026-08-08T03:10:39.775040",
+    "Last settings update": "None",
+    "Upgrade mode": "None",
+    "Fog address": "https://inext-agents.cloud.ngen.checkpoint.com",
+    "Registration status": "Succeeded ",
+    "Registration details": {
+        "Name": "8baf295cc6a4",
+        "Type": "Docker",
+        "Platform": "alpine",
+        "Architecture": "x86_64"
+    },
+    "Agent ID": "811ad3bb-1e65-41df-80ed-bbc580551eee",
+    "Profile ID": "88c10df0-f9b1-5013-7b17-c3949a04e481",
+    "Tenant ID": "d62213d2-7dda-4b14-9003-b0a407809f91",
+    "Manifest status": "Succeeded ",
+    "Service policy": {
+        "accessControlV2": "/etc/cp/conf/accessControlV2/accessControlV2.policy",
+        "exceptions": "/etc/cp/conf/exceptions/exceptions.policy",
+        "fileSecurity": "/etc/cp/conf/fileSecurity/fileSecurity.policy",
+        "ips": "/etc/cp/conf/ips/ips.policy",
+        "registration-data": "/etc/cp/conf/registration-data/registration-data.policy",
+        "snort": "/etc/cp/conf/snort/snort.policy",
+        "waap": "/etc/cp/conf/waap/waap.policy"
+    },
+    "Service settings": {}
+}

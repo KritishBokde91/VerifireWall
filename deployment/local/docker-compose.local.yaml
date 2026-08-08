@@ -1,0 +1,157 @@
+## 100% local open-appsec stack — no cloud, no tokens, no accounts needed
+## Usage: cd deployment/local && ./setup-local.sh
+
+services:
+
+  # ─── open-appsec Security Agent ────────────────────────────────────────────
+  appsec-agent:
+    image: ghcr.io/openappsec/agent:latest
+    container_name: appsec-agent
+    ipc: host
+    restart: unless-stopped
+    environment:
+      - SHARED_STORAGE_HOST=appsec-shared-storage
+      - LEARNING_HOST=appsec-smartsync
+      - TUNING_HOST=appsec-tuning-svc
+      - registered_server=NGINX
+      - autoPolicyLoad=true        # auto-reload local policy on change
+    volumes:
+      - ./appsec-config:/etc/cp/conf
+      - ./appsec-data:/etc/cp/data
+      - ./appsec-logs:/var/log/nano_agent
+      - ./appsec-localconfig:/ext/appsec       # local policy lives here
+      - shm-volume:/dev/shm/check-point
+    command: /cp-nano-agent --standalone
+    networks:
+      - appsec-net
+    depends_on:
+      - appsec-shared-storage
+      - appsec-smartsync
+
+  # ─── NGINX with open-appsec WAF Attachment ─────────────────────────────────
+  appsec-nginx:
+    image: ghcr.io/openappsec/nginx-attachment:latest
+    container_name: appsec-nginx
+    ipc: host
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx-config:/etc/nginx/conf.d
+      - shm-volume:/dev/shm/check-point
+    networks:
+      - appsec-net
+    depends_on:
+      - appsec-agent
+      - juiceshop-backend
+
+  # ─── JuiceShop — Intentionally Vulnerable Test App ─────────────────────────
+  juiceshop-backend:
+    image: bkimminich/juice-shop:latest
+    container_name: juiceshop-backend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"    # direct access (bypasses WAF — use for comparison)
+    networks:
+      - appsec-net
+
+  # ─── SmartSync — Local Learning Correlator ─────────────────────────────────
+  appsec-smartsync:
+    image: ghcr.io/openappsec/smartsync:latest
+    container_name: appsec-smartsync
+    restart: unless-stopped
+    environment:
+      - SHARED_STORAGE_HOST=appsec-shared-storage
+    networks:
+      - appsec-net
+    depends_on:
+      - appsec-shared-storage
+
+  # ─── Shared Storage for Learning Data ──────────────────────────────────────
+  appsec-shared-storage:
+    image: ghcr.io/openappsec/smartsync-shared-files:latest
+    container_name: appsec-shared-storage
+    restart: unless-stopped
+    user: root
+    ipc: host
+    volumes:
+      - ./appsec-smartsync-storage:/db:z
+    networks:
+      - appsec-net
+
+  # ─── NGINX Prometheus Exporter ────────────────────────────────────────────
+  nginx-exporter:
+    image: nginx/nginx-prometheus-exporter:latest
+    container_name: appsec-nginx-exporter
+    restart: unless-stopped
+    command:
+      - '--nginx.scrape-uri=http://appsec-nginx:80/nginx_status'
+    networks:
+      - appsec-net
+    depends_on:
+      - appsec-nginx
+
+  # ─── Prometheus — Metrics Collector ────────────────────────────────────────
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: appsec-prometheus
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus:/etc/prometheus
+      - prometheus-data:/prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--web.console.libraries=/usr/share/prometheus/console_libraries"
+      - "--web.console.templates=/usr/share/prometheus/consoles"
+      - "--web.enable-lifecycle"
+    networks:
+      - appsec-net
+
+  # ─── Grafana — Live Dashboard ───────────────────────────────────────────────
+  grafana:
+    image: grafana/grafana:latest
+    container_name: appsec-grafana
+    restart: unless-stopped
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=appsec123
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH=/etc/grafana/provisioning/dashboards/appsec-dashboard.json
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - grafana-data:/var/lib/grafana
+    networks:
+      - appsec-net
+    depends_on:
+      - prometheus
+
+  # ─── Log Viewer (Dozzle) — Real-time Container Logs ────────────────────────
+  dozzle:
+    image: amir20/dozzle:latest
+    container_name: appsec-dozzle
+    restart: unless-stopped
+    ports:
+      - "9999:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - appsec-net
+
+volumes:
+  shm-volume:
+    driver: local
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+  prometheus-data:
+  grafana-data:
+
+networks:
+  appsec-net:
+    driver: bridge

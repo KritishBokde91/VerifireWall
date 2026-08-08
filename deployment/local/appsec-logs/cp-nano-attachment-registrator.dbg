@@ -1,0 +1,346 @@
+[addStream@logging.cc:107                                     | ---] Successfully added log stream. Stream type: JSON Debug stream
+[addStream@logging.cc:107                                     | ---] Successfully added log stream. Stream type: JSON FOG stream
+[init@components_list_impl.h:128                              | ---] Initializing component: Environment
+[init@components_list_impl.h:128                              | ---] Initializing component: DebugIS
+[2026-08-07T17:46:06.045208: : init@components_list_impl.h:128                            | ---] Initializing component: Version
+[2026-08-07T17:46:06.045228: : init@components_list_impl.h:128                            | ---] Initializing component: Buffer
+[2026-08-07T17:46:06.045240: : init@components_list_impl.h:128                            | ---] Initializing component: ShellCmd
+[2026-08-07T17:46:06.045251: : init@components_list_impl.h:128                            | ---] Initializing component: MetricScraper
+[2026-08-07T17:46:06.045261: : init@components_list_impl.h:128                            | ---] Initializing component: GenericMetric
+[2026-08-07T17:46:06.045273: : init@components_list_impl.h:128                            | ---] Initializing component: Messaging
+[2026-08-07T17:46:06.046265: : init@components_list_impl.h:128                            | ---] Initializing component: MainloopComponent
+[2026-08-07T17:46:06.046406: : init@components_list_impl.h:128                            | ---] Initializing component: ConfigComponent
+[2026-08-07T17:46:06.046472: : init@components_list_impl.h:128                            | ---] Initializing component: InstanceAwareness
+[2026-08-07T17:46:06.046486: : init@components_list_impl.h:128                            | ---] Initializing component: IntelligenceComponentV2
+[2026-08-07T17:46:06.046495: : getRegistrationIntervalSec@intelligence_comp_v2.cc:496     | ---] Using registration interval: 720 seconds
+[2026-08-07T17:46:06.046541: : init@components_list_impl.h:128                            | ---] Initializing component: AgentDetails
+[2026-08-07T17:46:06.048504: : getMachineTypeFromDmiTable@agent_details.cc:387            | ###] Error. Could not decode the DMI table. Table value is empty
+[2026-08-07T17:46:06.048536: : registerMachineType@agent_details.cc:409                   | ###] Error. Machine type is unrecognized
+[2026-08-07T17:46:06.048547: : registerMachineType@agent_details.cc:414                   | ---] Setting machine type 3
+[2026-08-07T17:46:06.048633: : loadAccessToken@agent_details.cc:363                       | ###] Failed to open session token file: /etc/cp/data/data3.a
+[2026-08-07T17:46:06.048819: : init@components_list_impl.h:128                            | ---] Initializing component: LoggingComp
+[2026-08-07T17:46:06.048930: : init@components_list_impl.h:128                            | ---] Initializing component: TimeProxyComponent
+[2026-08-07T17:46:06.048949: : init@components_list_impl.h:128                            | ---] Initializing component: SignalHandler
+[2026-08-07T17:46:06.049037: : init@components_list_impl.h:128                            | ---] Initializing component: RestServer
+[2026-08-07T17:46:06.049095: : init@components_list_impl.h:128                            | ---] Initializing component: Encryptor
+[2026-08-07T17:46:06.049112: : init@components_list_impl.h:128                            | ---] Initializing component: SocketIS
+[2026-08-07T17:46:06.049119: : init@components_list_impl.h:128                            | ---] Initializing component: CPUCalculator
+[2026-08-07T17:46:06.049127: : init@components_list_impl.h:128                            | ---] Initializing component: CPUManager
+[2026-08-07T17:46:06.049231: : init@components_list_impl.h:128                            | ---] Initializing component: MemoryCalculator
+[2026-08-07T17:46:06.049406: : init@components_list_impl.h:128                            | ---] Initializing component: TenantManager
+[2026-08-07T17:46:06.049430: : init@components_list_impl.h:128                            | ---] Initializing component: GenericRulebase
+[2026-08-07T17:46:06.049452: : init@components_list_impl.h:128                            | ---] Initializing component: EnvDetails
+[2026-08-07T17:46:06.049469: : init@components_list_impl.h:128                            | ---] Initializing component: AttachmentRegistrator
+[2026-08-07T17:46:06.049615: : run@mainloop.cc:256                                        | ---] Starting the Mainloop
+[2026-08-07T17:46:06.049709: : <14> operator()@rest_server.cc:309                         | ---] REST server started: 8124. Accepting: loopback connections
+[2026-08-07T17:46:06.061010: : <9> loadAccessToken@agent_details.cc:363                   | ###] Failed to open session token file: /etc/cp/data/data3.a
+[2026-08-07T17:46:06.073201: : <5> reportStartupEvent@mainloop.cc:241                     | ---] Startup report was successfully sent to fog
+[2026-08-07T17:46:06.073369: : <10> sendLog@debug_stream.cc:33                            | ---] {
+    "eventTime": "2026-08-07T17:46:06.049",
+    "eventName": "Check Point Nano-service started",
+    "eventSeverity": "Info",
+    "eventPriority": "Medium",
+    "eventType": "Event Driven",
+    "eventLevel": "Log",
+    "eventLogLevel": "info",
+    "eventAudience": "Security",
+    "eventAudienceTeam": "",
+    "eventFrequency": 0,
+    "eventTags": [
+        "Informational"
+    ],
+    "eventSource": {
+        "agentId": "Unknown",
+        "eventTraceId": "",
+        "eventSpanId": "",
+        "issuingEngineVersion": "1.1.35-open-source",
+        "serviceName": "Attachment Registration Manager"
+    },
+    "eventData": {
+        "logIndex": 1,
+        "serviceName": "Attachment Registration Manager"
+    }
+}
+[2026-08-07T17:46:06.073491: : <12> setupAlternateSignalStack@signal_handler.cc:272       | ---] Alternate stack allocated successfully. Allocated size: 1048576
+[2026-08-07T17:46:06.814206: : <7> periodicRegistrationRefresh@config.cc:773              | ---] Configuration update registration with orchestrator succeeded.
+[2026-08-07T17:46:08.297202: : <4> run@mainloop.cc:337                                    | ###] Routine execution exceeded run time. Routine name: Handling in-memory messages, time slice: 1500, exceeded time: 238293 microseconds
+[2026-08-07T17:46:11.060058: : <3> sendMessage@messaging_buffer_comp.cc:335               | ###] Reached maximum number of retries - poping message
+[2026-08-07T17:46:11.060753: : <3> sendMessage@messaging_buffer_comp.cc:335               | ###] Reached maximum number of retries - poping message
+[2026-08-07T17:46:25.156371: : <25> tryToBioConnect@connection.cc:528                     | ###] Connection to: 127.0.0.1:7778 failed and won't retry. Error: error:8000006F:system library::Connection refused
+[2026-08-07T17:46:25.167812: : <25> connectToHost@connection.cc:589                       | ###] Connection to: 127.0.0.1:7778 failed and will be suspended for 60 seconds
+[2026-08-07T17:46:25.167870: : <25> establishConnection@connection.cc:201                 | ###] Failed to connect to host: 127.0.0.1:7778. There won't be a retry attempt.
+[2026-08-07T17:46:25.167887: : <25> establishNewConnection@connection_comp.cc:113         | ###] Failed to establish connection. Error: 127.0.0.1:7778. There won't be a retry attempt.
+[2026-08-07T17:46:25.167896: : <25> getConnection@messaging_comp.cc:114                   | ###] Failed to establish connection. Error: 127.0.0.1:7778. There won't be a retry attempt.
+[2026-08-07T17:46:25.167905: : <25> sendMessage@messaging_comp.cc:130                     | ###] Failed to get connection. Error: Failed to establish connection. Error: 127.0.0.1:7778. There won't be a retry attempt.
+[2026-08-07T17:46:25.167931: : <25> getAllTenants@tenant_manager.cc:256                   | ###] Failed to get all active tenants. Error: Failed to establish connection. Error: 127.0.0.1:7778. There won't be a retry attempt.
+[2026-08-07T17:46:25.183043: : <25> load@triggers_config.cc:207                           | ###] Failed to parse the extendLoggingMinSeverityfield: 'high'
+[2026-08-07T17:46:25.183084: : <25> openLogFile@file_stream.cc:101                        | ---] Empty log file name, no log file will be written
+[2026-08-07T17:46:25.183108: : <25> addStream@logging.cc:107                              | ---] Successfully added log stream. Stream type: JSON File stream
+[2026-08-07T17:46:25.194866: : <25> addStream@logging.cc:107                              | ---] Successfully added log stream. Stream type: JSON Debug stream
+[2026-08-07T17:46:25.194907: : <25> addStream@logging.cc:107                              | ---] Successfully added log stream. Stream type: JSON FOG stream
+[2026-08-07T17:56:06.221342: : <4> receiveData@connection.cc:651                          | ###] Failed to read data from BIO socket. Error: error:1000006E:BIO routines::nbio connect error
+[2026-08-07T17:56:08.788143: : <4> run@mainloop.cc:337                                    | ###] Routine execution exceeded run time. Routine name: Handling in-memory messages, time slice: 1500, exceeded time: 2565516 microseconds
+[2026-08-07T17:56:08.793032: : <7> sendOrchestatorConfMsg@config.cc:237                   | ###] Could not send configuration to orchestrator 7777, error: Failed to parse response body. Body: 
+, error-code: 0
+[2026-08-07T17:56:08.793105: : <7> sendData@connection.cc:628                             | ###] Failed to write data into BIO socket. Error: error:00000000:lib(0)::reason(0)
+[2026-08-07T17:56:08.793207: : <7> tryToBioConnect@connection.cc:528                      | ###] Connection to: 127.0.0.1:7778 failed and won't retry. Error: error:8000006F:system library::Connection refused
+[2026-08-07T17:56:08.805271: : <7> connectToHost@connection.cc:589                        | ###] Connection to: 127.0.0.1:7778 failed and will be suspended for 60 seconds
+[2026-08-07T17:56:08.805298: : <7> establishConnection@connection.cc:201                  | ###] Failed to connect to host: 127.0.0.1:7778. There won't be a retry attempt.
+[2026-08-07T17:56:08.805329: : <7> sendData@connection.cc:628                             | ###] Failed to write data into BIO socket. Error: error:1000006E:BIO routines::nbio connect error
+[2026-08-07T17:56:08.805344: : <7> sendOrchestatorConfMsg@config.cc:258                   | ###] Could not send configuration to orchestrator 7778, error: Failed to write data into BIO socket. Error: error:1000006E:BIO routines::nbio connect error, error-code: -1
+[2026-08-07T17:56:09.315701: : <7> periodicRegistrationRefresh@config.cc:773              | ---] Configuration update registration with orchestrator succeeded.
+[2026-08-07T18:06:09.327128: : <7> periodicRegistrationRefresh@config.cc:773              | ---] Configuration update registration with orchestrator succeeded.
+[2026-08-07T18:06:16.875961: : <4> sendAndReceiveData@connection.cc:789                   | ###] No data received for 10 seconds
+[2026-08-07T18:06:21.883762: : <4> tryToBioConnect@connection.cc:528                      | ###] Connection to: inext-agents.cloud.ngen.checkpoint.com:443 failed and won't retry. Error: error:10080002:BIO routines::system lib
+[2026-08-07T18:06:21.883827: : <4> connectToHost@connection.cc:589                        | ###] Connection to: inext-agents.cloud.ngen.checkpoint.com:443 failed and will be suspended for 60 seconds
+[2026-08-07T18:06:21.883846: : <4> establishConnection@connection.cc:201                  | ###] Failed to connect to host: inext-agents.cloud.ngen.checkpoint.com:443. There won't be a retry attempt.
+[2026-08-07T18:06:21.883864: : <4> sendAndReceiveData@connection.cc:693                   | ###] The previous request failed to receive a response. Closing the connection
+[2026-08-07T18:06:21.883898: : <4> run@mainloop.cc:337                                    | ###] Routine execution exceeded run time. Routine name: Handling in-memory messages, time slice: 1500, exceeded time: 5006475 microseconds
+[2026-08-07T18:06:26.896645: : <4> tryToBioConnect@connection.cc:528                      | ###] Connection to: inext-agents.cloud.ngen.checkpoint.com:443 failed and won't retry. Error: error:10080002:BIO routines::system lib
+[2026-08-07T18:06:26.896703: : <4> connectToHost@connection.cc:589                        | ###] Connection to: inext-agents.cloud.ngen.checkpoint.com:443 failed and will be suspended for 60 seconds
+[2026-08-07T18:06:26.896723: : <4> establishConnection@connection.cc:201                  | ###] Failed to connect to host: inext-agents.cloud.ngen.checkpoint.com:443. There won't be a retry attempt.
+[2026-08-07T18:06:26.896735: : <4> establishNewConnection@connection_comp.cc:113          | ###] Failed to establish connection. Error: inext-agents.cloud.ngen.checkpoint.com:443. There won't be a retry attempt.
+[2026-08-07T18:06:26.896746: : <4> getConnection@messaging_comp.cc:114                    | ###] Failed to establish connection. Error: inext-agents.cloud.ngen.checkpoint.com:443. There won't be a retry attempt.
+[2026-08-07T18:06:26.896754: : <4> sendMessage@messaging_comp.cc:130                      | ###] Failed to get connection. Error: Failed to establish connection. Error: inext-agents.cloud.ngen.checkpoint.com:443. There won't be a retry attempt.
+[2026-08-07T18:06:26.896769: : <4> run@mainloop.cc:337                                    | ###] Routine execution exceeded run time. Routine name: Handling in-memory messages, time slice: 1500, exceeded time: 5006671 microseconds
+[2026-08-07T18:16:08.243125: : <4> run@mainloop.cc:337                                    | ###] Routine execution exceeded run time. Routine name: Handling in-memory messages, time slice: 1500, exceeded time: 220943 microseconds
+[2026-08-07T18:16:09.330771: : <7> periodicRegistrationRefresh@config.cc:773              | ---] Configuration update registration with orchestrator succeeded.
+[2026-08-07T18:16:19.755840: : <4> sendAndReceiveData@connection.cc:789                   | ###] No data received for 10 seconds
+[2026-08-07T18:16:21.504900: : <4> run@mainloop.cc:337                                    | ###] Routine execution exceeded run time. Routine name: Handling in-memory messages, time slice: 1500, exceeded time: 1747599 microseconds
+[2026-08-07T18:16:38.113757: : <4> sendAndReceiveData@connection.cc:789                   | ###] No data received for 10 seconds
+[2026-08-07T18:16:41.497253: : <4> run@mainloop.cc:337                                    | ###] Routine execution exceeded run time. Routine name: Handling in-memory messages, time slice: 1500, exceeded time: 3382040 microseconds
+[2026-08-07T18:26:09.335765: : <7> periodicRegistrationRefresh@config.cc:773              | ---] Configuration update registration with orchestrator succeeded.
+[2026-08-07T18:26:16.666610: : <4> sendAndReceiveData@connection.cc:789                   | ###] No data received for 10 seconds
+[2026-08-07T18:26:21.673755: : <4> tryToBioConnect@connection.cc:528                      | ###] Connection to: inext-agents.cloud.ngen.checkpoint.com:443 failed and won't retry. Error: error:10080002:BIO routines::system lib
+[2026-08-07T18:26:21.673824: : <4> connectToHost@connection.cc:589                        | ###] Connection to: inext-agents.cloud.ngen.checkpoint.com:443 failed and will be suspended for 60 seconds
+[2026-08-07T18:26:21.673837: : <4> establishConnection@connection.cc:201                  | ###] Failed to connect to host: inext-agents.cloud.ngen.checkpoint.com:443. There won't be a retry attempt.
+[2026-08-07T18:26:21.673850: : <4> sendAndReceiveData@connection.cc:693                   | ###] The previous request failed to receive a response. Closing the connection
+[2026-08-07T18:26:21.673878: : <4> run@mainloop.cc:337                                    | ###] Routine execution exceeded run time. Routine name: Handling in-memory messages, time slice: 1500, exceeded time: 5005791 microseconds
+[2026-08-07T18:26:26.685635: : <4> tryToBioConnect@connection.cc:528                      | ###] Connection to: inext-agents.cloud.ngen.checkpoint.com:443 failed and won't retry. Error: error:10080002:BIO routines::system lib
+[2026-08-07T18:26:26.685700: : <4> connectToHost@connection.cc:589                        | ###] Connection to: inext-agents.cloud.ngen.checkpoint.com:443 failed and will be suspended for 60 seconds
+[2026-08-07T18:26:26.685724: : <4> establishConnection@connection.cc:201                  | ###] Failed to connect to host: inext-agents.cloud.ngen.checkpoint.com:443. There won't be a retry attempt.
+[2026-08-07T18:26:26.685737: : <4> establishNewConnection@connection_comp.cc:113          | ###] Failed to establish connection. Error: inext-agents.cloud.ngen.checkpoint.com:443. There won't be a retry attempt.
+[2026-08-07T18:26:26.685748: : <4> getConnection@messaging_comp.cc:114                    | ###] Failed to establish connection. Error: inext-agents.cloud.ngen.checkpoint.com:443. There won't be a retry attempt.
+[2026-08-07T18:26:26.685757: : <4> sendMessage@messaging_comp.cc:130                      | ###] Failed to get connection. Error: Failed to establish connection. Error: inext-agents.cloud.ngen.checkpoint.com:443. There won't be a retry attempt.
+[2026-08-07T18:26:26.685774: : <4> run@mainloop.cc:337                                    | ###] Routine execution exceeded run time. Routine name: Handling in-memory messages, time slice: 1500, exceeded time: 5005675 microseconds
+[addStream@logging.cc:107                                     | ---] Successfully added log stream. Stream type: JSON Debug stream
+[addStream@logging.cc:107                                     | ---] Successfully added log stream. Stream type: JSON FOG stream
+[init@components_list_impl.h:128                              | ---] Initializing component: Environment
+[init@components_list_impl.h:128                              | ---] Initializing component: DebugIS
+[2026-08-08T03:09:21.967436: : init@components_list_impl.h:128                            | ---] Initializing component: Version
+[2026-08-08T03:09:21.967457: : init@components_list_impl.h:128                            | ---] Initializing component: Buffer
+[2026-08-08T03:09:21.967467: : init@components_list_impl.h:128                            | ---] Initializing component: ShellCmd
+[2026-08-08T03:09:21.967477: : init@components_list_impl.h:128                            | ---] Initializing component: MetricScraper
+[2026-08-08T03:09:21.967486: : init@components_list_impl.h:128                            | ---] Initializing component: GenericMetric
+[2026-08-08T03:09:21.967496: : init@components_list_impl.h:128                            | ---] Initializing component: Messaging
+[2026-08-08T03:09:21.968685: : init@components_list_impl.h:128                            | ---] Initializing component: MainloopComponent
+[2026-08-08T03:09:21.968816: : init@components_list_impl.h:128                            | ---] Initializing component: ConfigComponent
+[2026-08-08T03:09:21.968887: : init@components_list_impl.h:128                            | ---] Initializing component: InstanceAwareness
+[2026-08-08T03:09:21.968899: : init@components_list_impl.h:128                            | ---] Initializing component: IntelligenceComponentV2
+[2026-08-08T03:09:21.968911: : getRegistrationIntervalSec@intelligence_comp_v2.cc:496     | ---] Using registration interval: 720 seconds
+[2026-08-08T03:09:21.968985: : init@components_list_impl.h:128                            | ---] Initializing component: AgentDetails
+[2026-08-08T03:09:21.973631: : getMachineTypeFromDmiTable@agent_details.cc:387            | ###] Error. Could not decode the DMI table. Table value is empty
+[2026-08-08T03:09:21.973659: : registerMachineType@agent_details.cc:409                   | ###] Error. Machine type is unrecognized
+[2026-08-08T03:09:21.973669: : registerMachineType@agent_details.cc:414                   | ---] Setting machine type 3
+[2026-08-08T03:09:21.974099: : init@components_list_impl.h:128                            | ---] Initializing component: LoggingComp
+[2026-08-08T03:09:21.974253: : init@components_list_impl.h:128                            | ---] Initializing component: TimeProxyComponent
+[2026-08-08T03:09:21.974277: : init@components_list_impl.h:128                            | ---] Initializing component: SignalHandler
+[2026-08-08T03:09:21.974396: : init@components_list_impl.h:128                            | ---] Initializing component: RestServer
+[2026-08-08T03:09:21.974492: : init@components_list_impl.h:128                            | ---] Initializing component: Encryptor
+[2026-08-08T03:09:21.974514: : init@components_list_impl.h:128                            | ---] Initializing component: SocketIS
+[2026-08-08T03:09:21.974532: : init@components_list_impl.h:128                            | ---] Initializing component: CPUCalculator
+[2026-08-08T03:09:21.974551: : init@components_list_impl.h:128                            | ---] Initializing component: CPUManager
+[2026-08-08T03:09:21.974691: : init@components_list_impl.h:128                            | ---] Initializing component: MemoryCalculator
+[2026-08-08T03:09:21.974832: : init@components_list_impl.h:128                            | ---] Initializing component: TenantManager
+[2026-08-08T03:09:21.974858: : init@components_list_impl.h:128                            | ---] Initializing component: GenericRulebase
+[2026-08-08T03:09:21.974880: : init@components_list_impl.h:128                            | ---] Initializing component: EnvDetails
+[2026-08-08T03:09:21.974895: : init@components_list_impl.h:128                            | ---] Initializing component: AttachmentRegistrator
+[2026-08-08T03:09:21.975027: : run@mainloop.cc:256                                        | ---] Starting the Mainloop
+[2026-08-08T03:09:21.975142: : <14> operator()@rest_server.cc:309                         | ---] REST server started: 8124. Accepting: loopback connections
+[2026-08-08T03:09:21.986750: : <7> tryToBioConnect@connection.cc:528                      | ###] Connection to: 127.0.0.1:7777 failed and won't retry. Error: error:8000006F:system library::Connection refused
+[2026-08-08T03:09:22.002537: : <5> reportStartupEvent@mainloop.cc:241                     | ---] Startup report was successfully sent to fog
+[2026-08-08T03:09:22.002569: : <7> connectToHost@connection.cc:589                        | ###] Connection to: 127.0.0.1:7777 failed and will be suspended for 60 seconds
+[2026-08-08T03:09:22.002579: : <7> establishConnection@connection.cc:201                  | ###] Failed to connect to host: 127.0.0.1:7777. There won't be a retry attempt.
+[2026-08-08T03:09:22.002589: : <7> establishNewConnection@connection_comp.cc:113          | ###] Failed to establish connection. Error: 127.0.0.1:7777. There won't be a retry attempt.
+[2026-08-08T03:09:22.002598: : <7> getConnection@messaging_comp.cc:114                    | ###] Failed to establish connection. Error: 127.0.0.1:7777. There won't be a retry attempt.
+[2026-08-08T03:09:22.002607: : <7> sendMessage@messaging_comp.cc:130                      | ###] Failed to get connection. Error: Failed to establish connection. Error: 127.0.0.1:7777. There won't be a retry attempt.
+[2026-08-08T03:09:22.002618: : <7> sendOrchestatorConfMsg@config.cc:237                   | ###] Could not send configuration to orchestrator 7777, error: Failed to establish connection. Error: 127.0.0.1:7777. There won't be a retry attempt., error-code: -1
+[2026-08-08T03:09:22.002840: : <7> tryToBioConnect@connection.cc:528                      | ###] Connection to: 127.0.0.1:7778 failed and won't retry. Error: error:1000006E:BIO routines::nbio connect error
+[2026-08-08T03:09:22.002893: : <10> sendLog@debug_stream.cc:33                            | ---] {
+    "eventTime": "2026-08-08T03:09:21.974",
+    "eventName": "Check Point Nano-service started",
+    "eventSeverity": "Info",
+    "eventPriority": "Medium",
+    "eventType": "Event Driven",
+    "eventLevel": "Log",
+    "eventLogLevel": "info",
+    "eventAudience": "Security",
+    "eventAudienceTeam": "",
+    "eventFrequency": 0,
+    "eventTags": [
+        "Informational"
+    ],
+    "eventSource": {
+        "agentId": "811ad3bb-1e65-41df-80ed-bbc580551eee",
+        "eventTraceId": "",
+        "eventSpanId": "",
+        "issuingEngineVersion": "1.1.35-open-source",
+        "serviceName": "Attachment Registration Manager"
+    },
+    "eventData": {
+        "logIndex": 1,
+        "serviceName": "Attachment Registration Manager"
+    }
+}
+[2026-08-08T03:09:22.002955: : <10> closeLogFile@file_stream.cc:119                       | ###] Failed in closing log file. File path: 
+[2026-08-08T03:09:22.003184: : <12> setupAlternateSignalStack@signal_handler.cc:272       | ---] Alternate stack allocated successfully. Allocated size: 1048576
+[2026-08-08T03:09:22.016532: : <7> connectToHost@connection.cc:589                        | ###] Connection to: 127.0.0.1:7778 failed and will be suspended for 60 seconds
+[2026-08-08T03:09:22.016581: : <7> establishConnection@connection.cc:201                  | ###] Failed to connect to host: 127.0.0.1:7778. There won't be a retry attempt.
+[2026-08-08T03:09:22.016597: : <7> establishNewConnection@connection_comp.cc:113          | ###] Failed to establish connection. Error: 127.0.0.1:7778. There won't be a retry attempt.
+[2026-08-08T03:09:22.016606: : <7> getConnection@messaging_comp.cc:114                    | ###] Failed to establish connection. Error: 127.0.0.1:7778. There won't be a retry attempt.
+[2026-08-08T03:09:22.016615: : <7> sendMessage@messaging_comp.cc:130                      | ###] Failed to get connection. Error: Failed to establish connection. Error: 127.0.0.1:7778. There won't be a retry attempt.
+[2026-08-08T03:09:22.016629: : <7> sendOrchestatorConfMsg@config.cc:258                   | ###] Could not send configuration to orchestrator 7778, error: Failed to establish connection. Error: 127.0.0.1:7778. There won't be a retry attempt., error-code: -1
+[2026-08-08T03:09:22.524545: : <7> sendData@connection.cc:628                             | ###] Failed to write data into BIO socket. Error: error:8000006F:system library::Connection refused
+[2026-08-08T03:09:22.571678: : <7> periodicRegistrationRefresh@config.cc:773              | ---] Configuration update registration with orchestrator succeeded.
+[2026-08-08T03:09:24.033897: : <4> tryToBioConnect@connection.cc:528                      | ###] Connection to: inext-agents.cloud.ngen.checkpoint.com:443 failed and won't retry. Error: error:0A000086:SSL routines::certificate verify failed
+[2026-08-08T03:09:24.039065: : <4> connectToHost@connection.cc:589                        | ###] Connection to: inext-agents.cloud.ngen.checkpoint.com:443 failed and will be suspended for 60 seconds
+[2026-08-08T03:09:24.039133: : <4> establishConnection@connection.cc:201                  | ###] Failed to connect to host: inext-agents.cloud.ngen.checkpoint.com:443. There won't be a retry attempt.
+[2026-08-08T03:09:24.039151: : <4> establishNewConnection@connection_comp.cc:113          | ###] Failed to establish connection. Error: inext-agents.cloud.ngen.checkpoint.com:443. There won't be a retry attempt.
+[2026-08-08T03:09:24.039165: : <4> getConnection@messaging_comp.cc:114                    | ###] Failed to establish connection. Error: inext-agents.cloud.ngen.checkpoint.com:443. There won't be a retry attempt.
+[2026-08-08T03:09:24.039175: : <4> sendMessage@messaging_comp.cc:130                      | ###] Failed to get connection. Error: Failed to establish connection. Error: inext-agents.cloud.ngen.checkpoint.com:443. There won't be a retry attempt.
+[2026-08-08T03:09:24.076703: : <4> tryToBioConnect@connection.cc:528                      | ###] Connection to: inext-agents.cloud.ngen.checkpoint.com:443 failed and won't retry. Error: error:0A000086:SSL routines::certificate verify failed
+[2026-08-08T03:09:24.082659: : <4> connectToHost@connection.cc:589                        | ###] Connection to: inext-agents.cloud.ngen.checkpoint.com:443 failed and will be suspended for 60 seconds
+[2026-08-08T03:09:24.082727: : <4> establishConnection@connection.cc:201                  | ###] Failed to connect to host: inext-agents.cloud.ngen.checkpoint.com:443. There won't be a retry attempt.
+[2026-08-08T03:09:24.082763: : <4> establishNewConnection@connection_comp.cc:113          | ###] Failed to establish connection. Error: inext-agents.cloud.ngen.checkpoint.com:443. There won't be a retry attempt.
+[2026-08-08T03:09:24.082785: : <4> getConnection@messaging_comp.cc:114                    | ###] Failed to establish connection. Error: inext-agents.cloud.ngen.checkpoint.com:443. There won't be a retry attempt.
+[2026-08-08T03:09:24.082809: : <4> sendMessage@messaging_comp.cc:130                      | ###] Failed to get connection. Error: Failed to establish connection. Error: inext-agents.cloud.ngen.checkpoint.com:443. There won't be a retry attempt.
+[2026-08-08T03:10:40.572707: : <25> load@triggers_config.cc:207                           | ###] Failed to parse the extendLoggingMinSeverityfield: 'high'
+[2026-08-08T03:10:40.572767: : <25> openLogFile@file_stream.cc:101                        | ---] Empty log file name, no log file will be written
+[2026-08-08T03:10:40.572784: : <25> addStream@logging.cc:107                              | ---] Successfully added log stream. Stream type: JSON File stream
+[2026-08-08T03:10:40.573462: : <25> closeLogFile@file_stream.cc:119                       | ###] Failed in closing log file. File path: 
+[2026-08-08T03:10:40.573489: : <25> addStream@logging.cc:107                              | ---] Successfully added log stream. Stream type: JSON Debug stream
+[2026-08-08T03:10:40.573502: : <25> addStream@logging.cc:107                              | ---] Successfully added log stream. Stream type: JSON FOG stream
+[2026-08-08T03:19:23.199235: : <7> sendOrchestatorConfMsg@config.cc:237                   | ###] Could not send configuration to orchestrator 7777, error: Failed to parse response body. Body: 
+, error-code: 0
+[2026-08-08T03:19:23.199324: : <7> sendData@connection.cc:628                             | ###] Failed to write data into BIO socket. Error: error:00000000:lib(0)::reason(0)
+[2026-08-08T03:19:23.199482: : <7> tryToBioConnect@connection.cc:528                      | ###] Connection to: 127.0.0.1:7778 failed and won't retry. Error: error:8000006F:system library::Connection refused
+[2026-08-08T03:19:23.211626: : <7> connectToHost@connection.cc:589                        | ###] Connection to: 127.0.0.1:7778 failed and will be suspended for 60 seconds
+[2026-08-08T03:19:23.211659: : <7> establishConnection@connection.cc:201                  | ###] Failed to connect to host: 127.0.0.1:7778. There won't be a retry attempt.
+[2026-08-08T03:19:23.211712: : <7> sendData@connection.cc:628                             | ###] Failed to write data into BIO socket. Error: error:1000006E:BIO routines::nbio connect error
+[2026-08-08T03:19:23.211731: : <7> sendOrchestatorConfMsg@config.cc:258                   | ###] Could not send configuration to orchestrator 7778, error: Failed to write data into BIO socket. Error: error:1000006E:BIO routines::nbio connect error, error-code: -1
+[2026-08-08T03:19:23.716489: : <7> periodicRegistrationRefresh@config.cc:773              | ---] Configuration update registration with orchestrator succeeded.
+[2026-08-08T03:29:23.725686: : <7> periodicRegistrationRefresh@config.cc:773              | ---] Configuration update registration with orchestrator succeeded.
+[2026-08-08T03:29:34.360571: : <4> sendAndReceiveData@connection.cc:789                   | ###] No data received for 10 seconds
+[2026-08-08T03:39:23.730537: : <7> periodicRegistrationRefresh@config.cc:773              | ---] Configuration update registration with orchestrator succeeded.
+[2026-08-08T03:39:33.193103: : <4> sendAndReceiveData@connection.cc:789                   | ###] No data received for 10 seconds
+[2026-08-08T03:39:33.308892: : <4> run@mainloop.cc:337                                    | ###] Routine execution exceeded run time. Routine name: Handling in-memory messages, time slice: 1500, exceeded time: 114327 microseconds
+[2026-08-08T03:49:23.732701: : <7> periodicRegistrationRefresh@config.cc:773              | ---] Configuration update registration with orchestrator succeeded.
+[2026-08-08T03:49:34.618636: : <4> sendAndReceiveData@connection.cc:789                   | ###] No data received for 10 seconds
+[2026-08-08T03:49:36.037036: : <4> run@mainloop.cc:337                                    | ###] Routine execution exceeded run time. Routine name: Handling in-memory messages, time slice: 1500, exceeded time: 1416943 microseconds
+[2026-08-08T03:49:46.038152: : <4> connectToHost@connection.cc:598                        | ###] Connection attempts to: inext-agents.cloud.ngen.checkpoint.com:443 have reached timeout and will be suspended for 60 seconds
+[2026-08-08T03:49:46.038215: : <4> establishConnection@connection.cc:201                  | ###] Failed to connect to host: inext-agents.cloud.ngen.checkpoint.com:443. Connection has reached timeout.
+[2026-08-08T03:49:46.038250: : <4> sendAndReceiveData@connection.cc:693                   | ###] The previous request failed to receive a response. Closing the connection
+[2026-08-08T03:49:48.356297: : <4> run@mainloop.cc:337                                    | ###] Routine execution exceeded run time. Routine name: Handling in-memory messages, time slice: 1500, exceeded time: 2316683 microseconds
+[2026-08-08T03:59:23.740428: : <7> periodicRegistrationRefresh@config.cc:773              | ---] Configuration update registration with orchestrator succeeded.
+[2026-08-08T03:59:32.907602: : <4> sendAndReceiveData@connection.cc:789                   | ###] No data received for 10 seconds
+[2026-08-08T03:59:37.915747: : <4> tryToBioConnect@connection.cc:528                      | ###] Connection to: inext-agents.cloud.ngen.checkpoint.com:443 failed and won't retry. Error: error:10080002:BIO routines::system lib
+[2026-08-08T03:59:37.915839: : <4> connectToHost@connection.cc:589                        | ###] Connection to: inext-agents.cloud.ngen.checkpoint.com:443 failed and will be suspended for 60 seconds
+[2026-08-08T03:59:37.915856: : <4> establishConnection@connection.cc:201                  | ###] Failed to connect to host: inext-agents.cloud.ngen.checkpoint.com:443. There won't be a retry attempt.
+[2026-08-08T03:59:37.915872: : <4> sendAndReceiveData@connection.cc:693                   | ###] The previous request failed to receive a response. Closing the connection
+[2026-08-08T03:59:37.915899: : <4> run@mainloop.cc:337                                    | ###] Routine execution exceeded run time. Routine name: Handling in-memory messages, time slice: 1500, exceeded time: 5006822 microseconds
+[2026-08-08T03:59:42.927736: : <4> tryToBioConnect@connection.cc:528                      | ###] Connection to: inext-agents.cloud.ngen.checkpoint.com:443 failed and won't retry. Error: error:10080002:BIO routines::system lib
+[2026-08-08T03:59:42.927820: : <4> connectToHost@connection.cc:589                        | ###] Connection to: inext-agents.cloud.ngen.checkpoint.com:443 failed and will be suspended for 60 seconds
+[2026-08-08T03:59:42.927833: : <4> establishConnection@connection.cc:201                  | ###] Failed to connect to host: inext-agents.cloud.ngen.checkpoint.com:443. There won't be a retry attempt.
+[2026-08-08T03:59:42.927846: : <4> establishNewConnection@connection_comp.cc:113          | ###] Failed to establish connection. Error: inext-agents.cloud.ngen.checkpoint.com:443. There won't be a retry attempt.
+[2026-08-08T03:59:42.927858: : <4> getConnection@messaging_comp.cc:114                    | ###] Failed to establish connection. Error: inext-agents.cloud.ngen.checkpoint.com:443. There won't be a retry attempt.
+[2026-08-08T03:59:42.927872: : <4> sendMessage@messaging_comp.cc:130                      | ###] Failed to get connection. Error: Failed to establish connection. Error: inext-agents.cloud.ngen.checkpoint.com:443. There won't be a retry attempt.
+[2026-08-08T03:59:42.927887: : <4> run@mainloop.cc:337                                    | ###] Routine execution exceeded run time. Routine name: Handling in-memory messages, time slice: 1500, exceeded time: 5005721 microseconds
+[2026-08-08T04:09:23.741668: : <7> periodicRegistrationRefresh@config.cc:773              | ---] Configuration update registration with orchestrator succeeded.
+[2026-08-08T04:13:48.795116: : <22> writeData@socket_is.cc:106                            | ###] Failed to send data, Error: Broken pipe
+[2026-08-08T04:13:48.795506: : <22> replyWithRelevantHandler@attachment_registrator.cc:131 | ###] Failed to send handler path size to attachment
+[2026-08-08T04:13:48.796777: : <22> run@mainloop.cc:337                                   | ###] Routine execution exceeded run time. Routine name: Attachment's registration handler, time slice: 1500, exceeded time: 566298 microseconds
+[2026-08-08T04:13:49.352921: : <22> writeData@socket_is.cc:106                            | ###] Failed to send data, Error: Broken pipe
+[2026-08-08T04:13:49.353281: : <22> replyWithRelevantHandler@attachment_registrator.cc:131 | ###] Failed to send handler path size to attachment
+[2026-08-08T04:13:49.353488: : <22> run@mainloop.cc:337                                   | ###] Routine execution exceeded run time. Routine name: Attachment's registration handler, time slice: 1360, exceeded time: 555168 microseconds
+[2026-08-08T04:13:49.907184: : <22> run@mainloop.cc:337                                   | ###] Routine execution exceeded run time. Routine name: Attachment's registration handler, time slice: 1220, exceeded time: 552452 microseconds
+[2026-08-08T04:19:42.489240: : <7> periodicRegistrationRefresh@config.cc:773              | ---] Configuration update registration with orchestrator succeeded.
+[2026-08-08T04:19:52.069454: : <4> sendAndReceiveData@connection.cc:789                   | ###] No data received for 10 seconds
+[2026-08-08T04:29:42.494369: : <7> periodicRegistrationRefresh@config.cc:773              | ---] Configuration update registration with orchestrator succeeded.
+[2026-08-08T04:29:53.304977: : <4> sendAndReceiveData@connection.cc:789                   | ###] No data received for 10 seconds
+[2026-08-08T04:39:42.965332: : <4> receiveData@connection.cc:651                          | ###] Connection closed by peer
+[2026-08-08T04:39:43.113955: : <4> run@mainloop.cc:337                                    | ###] Routine execution exceeded run time. Routine name: Handling in-memory messages, time slice: 1500, exceeded time: 147395 microseconds
+[2026-08-08T04:39:43.114133: : <7> periodicRegistrationRefresh@config.cc:773              | ---] Configuration update registration with orchestrator succeeded.
+[2026-08-08T04:49:43.126761: : <7> periodicRegistrationRefresh@config.cc:773              | ---] Configuration update registration with orchestrator succeeded.
+[2026-08-08T04:49:53.383421: : <4> sendAndReceiveData@connection.cc:789                   | ###] No data received for 10 seconds
+[2026-08-08T04:49:54.331913: : <4> run@mainloop.cc:337                                    | ###] Routine execution exceeded run time. Routine name: Handling in-memory messages, time slice: 1500, exceeded time: 947031 microseconds
+[2026-08-08T04:59:43.129424: : <7> periodicRegistrationRefresh@config.cc:773              | ---] Configuration update registration with orchestrator succeeded.
+[2026-08-08T04:59:53.571062: : <4> sendAndReceiveData@connection.cc:789                   | ###] No data received for 10 seconds
+[2026-08-08T05:09:43.130059: : <7> periodicRegistrationRefresh@config.cc:773              | ---] Configuration update registration with orchestrator succeeded.
+[2026-08-08T05:09:43.615434: : <4> receiveData@connection.cc:651                          | ###] Failed to read data from BIO socket. Error: error:00000000:lib(0)::reason(0)
+[2026-08-08T05:09:43.849765: : <4> run@mainloop.cc:337                                    | ###] Routine execution exceeded run time. Routine name: Handling in-memory messages, time slice: 1500, exceeded time: 232888 microseconds
+[2026-08-08T05:19:42.071452: : <4> receiveData@connection.cc:651                          | ###] Failed to read data from BIO socket. Error: error:00000000:lib(0)::reason(0)
+[2026-08-08T05:19:43.131717: : <7> periodicRegistrationRefresh@config.cc:773              | ---] Configuration update registration with orchestrator succeeded.
+[2026-08-08T05:29:43.120742: : <4> receiveData@connection.cc:651                          | ###] Failed to read data from BIO socket. Error: error:00000000:lib(0)::reason(0)
+[2026-08-08T05:29:43.178801: : <7> periodicRegistrationRefresh@config.cc:773              | ---] Configuration update registration with orchestrator succeeded.
+[2026-08-08T05:39:43.188047: : <7> periodicRegistrationRefresh@config.cc:773              | ---] Configuration update registration with orchestrator succeeded.
+[2026-08-08T05:39:52.085319: : <4> sendAndReceiveData@connection.cc:789                   | ###] No data received for 10 seconds
+[2026-08-08T05:49:43.193761: : <7> periodicRegistrationRefresh@config.cc:773              | ---] Configuration update registration with orchestrator succeeded.
+[2026-08-08T05:49:52.591679: : <4> sendAndReceiveData@connection.cc:789                   | ###] No data received for 10 seconds
+[2026-08-08T05:59:43.202710: : <7> periodicRegistrationRefresh@config.cc:773              | ---] Configuration update registration with orchestrator succeeded.
+[2026-08-08T05:59:53.704192: : <4> sendAndReceiveData@connection.cc:789                   | ###] No data received for 10 seconds
+[2026-08-08T05:59:53.841375: : <4> run@mainloop.cc:337                                    | ###] Routine execution exceeded run time. Routine name: Handling in-memory messages, time slice: 1500, exceeded time: 135724 microseconds
+[2026-08-08T06:09:43.208216: : <7> periodicRegistrationRefresh@config.cc:773              | ---] Configuration update registration with orchestrator succeeded.
+[2026-08-08T06:09:53.562412: : <4> sendAndReceiveData@connection.cc:789                   | ###] No data received for 10 seconds
+[2026-08-08T06:09:53.667935: : <4> run@mainloop.cc:337                                    | ###] Routine execution exceeded run time. Routine name: Handling in-memory messages, time slice: 1500, exceeded time: 104078 microseconds
+[2026-08-08T06:19:43.218055: : <7> periodicRegistrationRefresh@config.cc:773              | ---] Configuration update registration with orchestrator succeeded.
+[2026-08-08T06:19:52.696467: : <4> sendAndReceiveData@connection.cc:789                   | ###] No data received for 10 seconds
+[2026-08-08T06:29:43.219715: : <7> periodicRegistrationRefresh@config.cc:773              | ---] Configuration update registration with orchestrator succeeded.
+[2026-08-08T06:29:52.817013: : <4> sendAndReceiveData@connection.cc:789                   | ###] No data received for 10 seconds
+[2026-08-08T06:39:43.225587: : <7> periodicRegistrationRefresh@config.cc:773              | ---] Configuration update registration with orchestrator succeeded.
+[2026-08-08T06:39:53.024296: : <4> sendAndReceiveData@connection.cc:789                   | ###] No data received for 10 seconds
+[2026-08-08T06:39:58.032400: : <4> tryToBioConnect@connection.cc:528                      | ###] Connection to: inext-agents.cloud.ngen.checkpoint.com:443 failed and won't retry. Error: error:10080002:BIO routines::system lib
+[2026-08-08T06:39:58.032474: : <4> connectToHost@connection.cc:589                        | ###] Connection to: inext-agents.cloud.ngen.checkpoint.com:443 failed and will be suspended for 60 seconds
+[2026-08-08T06:39:58.032487: : <4> establishConnection@connection.cc:201                  | ###] Failed to connect to host: inext-agents.cloud.ngen.checkpoint.com:443. There won't be a retry attempt.
+[2026-08-08T06:39:58.032498: : <4> sendAndReceiveData@connection.cc:693                   | ###] The previous request failed to receive a response. Closing the connection
+[2026-08-08T06:39:58.032529: : <4> run@mainloop.cc:337                                    | ###] Routine execution exceeded run time. Routine name: Handling in-memory messages, time slice: 1500, exceeded time: 5006782 microseconds
+[2026-08-08T06:40:03.045367: : <4> tryToBioConnect@connection.cc:528                      | ###] Connection to: inext-agents.cloud.ngen.checkpoint.com:443 failed and won't retry. Error: error:10080002:BIO routines::system lib
+[2026-08-08T06:40:03.045427: : <4> connectToHost@connection.cc:589                        | ###] Connection to: inext-agents.cloud.ngen.checkpoint.com:443 failed and will be suspended for 60 seconds
+[2026-08-08T06:40:03.045439: : <4> establishConnection@connection.cc:201                  | ###] Failed to connect to host: inext-agents.cloud.ngen.checkpoint.com:443. There won't be a retry attempt.
+[2026-08-08T06:40:03.045459: : <4> establishNewConnection@connection_comp.cc:113          | ###] Failed to establish connection. Error: inext-agents.cloud.ngen.checkpoint.com:443. There won't be a retry attempt.
+[2026-08-08T06:40:03.045469: : <4> getConnection@messaging_comp.cc:114                    | ###] Failed to establish connection. Error: inext-agents.cloud.ngen.checkpoint.com:443. There won't be a retry attempt.
+[2026-08-08T06:40:03.045479: : <4> sendMessage@messaging_comp.cc:130                      | ###] Failed to get connection. Error: Failed to establish connection. Error: inext-agents.cloud.ngen.checkpoint.com:443. There won't be a retry attempt.
+[2026-08-08T06:40:03.045498: : <4> run@mainloop.cc:337                                    | ###] Routine execution exceeded run time. Routine name: Handling in-memory messages, time slice: 1500, exceeded time: 5006713 microseconds
+[2026-08-08T06:49:43.228526: : <7> periodicRegistrationRefresh@config.cc:773              | ---] Configuration update registration with orchestrator succeeded.
+[2026-08-08T06:49:48.939957: : <4> tryToBioConnect@connection.cc:528                      | ###] Connection to: inext-agents.cloud.ngen.checkpoint.com:443 failed and won't retry. Error: error:10080002:BIO routines::system lib
+[2026-08-08T06:49:48.940049: : <4> connectToHost@connection.cc:589                        | ###] Connection to: inext-agents.cloud.ngen.checkpoint.com:443 failed and will be suspended for 60 seconds
+[2026-08-08T06:49:48.940070: : <4> establishConnection@connection.cc:201                  | ###] Failed to connect to host: inext-agents.cloud.ngen.checkpoint.com:443. There won't be a retry attempt.
+[2026-08-08T06:49:48.940087: : <4> isSuspended@connection.cc:184                          | ###] Reestablish connection failed
+[2026-08-08T06:49:48.940111: : <4> run@mainloop.cc:337                                    | ###] Routine execution exceeded run time. Routine name: Handling in-memory messages, time slice: 1500, exceeded time: 5006939 microseconds
+[2026-08-08T06:59:43.234338: : <7> periodicRegistrationRefresh@config.cc:773              | ---] Configuration update registration with orchestrator succeeded.
+[2026-08-08T06:59:43.992646: : <4> run@mainloop.cc:337                                    | ###] Routine execution exceeded run time. Routine name: Handling in-memory messages, time slice: 1500, exceeded time: 122288 microseconds
+[2026-08-08T07:09:42.737935: : <4> receiveData@connection.cc:651                          | ###] Failed to read data from BIO socket. Error: error:00000000:lib(0)::reason(0)
+[2026-08-08T07:09:43.140680: : <4> run@mainloop.cc:337                                    | ###] Routine execution exceeded run time. Routine name: Handling in-memory messages, time slice: 1500, exceeded time: 401315 microseconds
+[2026-08-08T07:09:43.239795: : <7> periodicRegistrationRefresh@config.cc:773              | ---] Configuration update registration with orchestrator succeeded.
+[2026-08-08T07:19:43.252048: : <7> periodicRegistrationRefresh@config.cc:773              | ---] Configuration update registration with orchestrator succeeded.
+[2026-08-08T07:19:52.340780: : <4> sendAndReceiveData@connection.cc:789                   | ###] No data received for 10 seconds
+[2026-08-08T07:19:52.862513: : <4> run@mainloop.cc:337                                    | ###] Routine execution exceeded run time. Routine name: Handling in-memory messages, time slice: 1500, exceeded time: 520305 microseconds
+[2026-08-08T07:20:12.541772: : <4> sendAndReceiveData@connection.cc:789                   | ###] No data received for 10 seconds
+[2026-08-08T07:20:14.300786: : <4> run@mainloop.cc:337                                    | ###] Routine execution exceeded run time. Routine name: Handling in-memory messages, time slice: 1500, exceeded time: 1757565 microseconds
+[2026-08-08T07:29:43.253565: : <7> periodicRegistrationRefresh@config.cc:773              | ---] Configuration update registration with orchestrator succeeded.
+[2026-08-08T07:29:52.577565: : <4> sendAndReceiveData@connection.cc:789                   | ###] No data received for 10 seconds
+[2026-08-08T07:29:54.057111: : <4> run@mainloop.cc:337                                    | ###] Routine execution exceeded run time. Routine name: Handling in-memory messages, time slice: 1500, exceeded time: 1478103 microseconds
+[2026-08-08T07:39:43.261397: : <7> periodicRegistrationRefresh@config.cc:773              | ---] Configuration update registration with orchestrator succeeded.
+[2026-08-08T07:39:53.447235: : <4> sendAndReceiveData@connection.cc:789                   | ###] No data received for 10 seconds
+[2026-08-08T07:39:53.939128: : <4> run@mainloop.cc:337                                    | ###] Routine execution exceeded run time. Routine name: Handling in-memory messages, time slice: 1500, exceeded time: 490430 microseconds
+[2026-08-08T07:49:43.268145: : <7> periodicRegistrationRefresh@config.cc:773              | ---] Configuration update registration with orchestrator succeeded.
+[2026-08-08T07:49:52.233414: : <4> sendAndReceiveData@connection.cc:789                   | ###] No data received for 10 seconds
+[2026-08-08T07:49:53.082647: : <4> run@mainloop.cc:337                                    | ###] Routine execution exceeded run time. Routine name: Handling in-memory messages, time slice: 1500, exceeded time: 847783 microseconds
+[2026-08-08T07:59:43.269249: : <7> periodicRegistrationRefresh@config.cc:773              | ---] Configuration update registration with orchestrator succeeded.
+[2026-08-08T07:59:52.441986: : <4> sendAndReceiveData@connection.cc:789                   | ###] No data received for 10 seconds
+[2026-08-08T07:59:52.609070: : <4> run@mainloop.cc:337                                    | ###] Routine execution exceeded run time. Routine name: Handling in-memory messages, time slice: 1500, exceeded time: 165635 microseconds
+[2026-08-08T08:09:43.270149: : <7> periodicRegistrationRefresh@config.cc:773              | ---] Configuration update registration with orchestrator succeeded.
+[2026-08-08T08:09:52.401313: : <4> sendAndReceiveData@connection.cc:789                   | ###] No data received for 10 seconds
+[2026-08-08T08:09:52.514323: : <4> run@mainloop.cc:337                                    | ###] Routine execution exceeded run time. Routine name: Handling in-memory messages, time slice: 1500, exceeded time: 111547 microseconds
+[2026-08-08T08:19:43.274271: : <7> periodicRegistrationRefresh@config.cc:773              | ---] Configuration update registration with orchestrator succeeded.
+[2026-08-08T08:19:53.198326: : <4> sendAndReceiveData@connection.cc:789                   | ###] No data received for 10 seconds
+[2026-08-08T08:19:53.956108: : <4> run@mainloop.cc:337                                    | ###] Routine execution exceeded run time. Routine name: Handling in-memory messages, time slice: 1500, exceeded time: 756325 microseconds

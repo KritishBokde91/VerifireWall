@@ -1,0 +1,87 @@
+cptest_ut 0 0
+agent_core_utilities_ut 0 0
+debug_is_ut 0 0
+time_proxy_ut 0 0
+singleton_ut 0 0
+buffers_ut 0 0
+mainloop_ut 0 0
+environment_ut 0 0
+rest_server_ut 0 0
+report_ut 0 0
+logging_ut 0 0
+messaging_comp_ut 0 0
+connection_comp_ut 0 0
+messaging_buffer_comp_ut 0 0
+agent_details_ut 0 0
+event_ut 0 0
+encryptor_ut 0 0
+cpu_ut 0 0
+memory_consumption_ut 0 0
+shared_ring_queue_ut 0 0
+shared_ipc_ut 0 0
+shm_pkt_queue_ut 0 0
+instance_awareness_ut 0 0
+agent_details_reporter_ut 0 0
+metric_ut 0 0
+version_ut 0 0
+compression_utils_ut 0 0
+http_configuration_ut 0 0
+report_messaging_ut 0 0
+core_ut 0 0
+nginx_attachment_util_ut 0 0
+gradual_deployment_ut 0 0
+packet_ut 0 0
+pending_key_ut 0 0
+http_transaction_data_ut 0 0
+keywords_ut 0 0
+pm_ut 0 0
+service_health_status_ut 0 0
+ips_ut 0 0
+layer_7_access_control_ut 0 0
+health_check_ut 0 0
+external_sdk_server_ut 0 0
+prometheus_ut 0 0
+---
+cptest_ut
+agent_core_utilities_ut
+debug_is_ut
+time_proxy_ut
+singleton_ut
+buffers_ut
+mainloop_ut
+environment_ut
+rest_server_ut
+report_ut
+logging_ut
+messaging_comp_ut
+connection_comp_ut
+messaging_buffer_comp_ut
+agent_details_ut
+event_ut
+encryptor_ut
+cpu_ut
+memory_consumption_ut
+shared_ring_queue_ut
+shared_ipc_ut
+shm_pkt_queue_ut
+instance_awareness_ut
+agent_details_reporter_ut
+metric_ut
+version_ut
+compression_utils_ut
+http_configuration_ut
+report_messaging_ut
+core_ut
+nginx_attachment_util_ut
+gradual_deployment_ut
+packet_ut
+pending_key_ut
+http_transaction_data_ut
+keywords_ut
+pm_ut
+service_health_status_ut
+ips_ut
+layer_7_access_control_ut
+health_check_ut
+external_sdk_server_ut
+prometheus_ut

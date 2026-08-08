@@ -1,0 +1,691 @@
+Start testing: Aug 07 08:19 IST
+----------------------------------------------------------
+Unable to find executable: /home/Kritish/Development/verifierwall/build/core/cptest/cptest_ut/cptest_ut
+1/43 Testing: cptest_ut
+1/43 Test: cptest_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/core/cptest/cptest_ut
+"cptest_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"cptest_ut" end time: Aug 07 08:19 IST
+"cptest_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/core/agent_core_utilities/agent_core_utilities_ut/agent_core_utilities_ut
+2/43 Testing: agent_core_utilities_ut
+2/43 Test: agent_core_utilities_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/core/agent_core_utilities/agent_core_utilities_ut
+"agent_core_utilities_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"agent_core_utilities_ut" end time: Aug 07 08:19 IST
+"agent_core_utilities_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/core/debug_is/debug_is_ut/debug_is_ut
+3/43 Testing: debug_is_ut
+3/43 Test: debug_is_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/core/debug_is/debug_is_ut
+"debug_is_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"debug_is_ut" end time: Aug 07 08:19 IST
+"debug_is_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/core/time_proxy/time_proxy_ut/time_proxy_ut
+4/43 Testing: time_proxy_ut
+4/43 Test: time_proxy_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/core/time_proxy/time_proxy_ut
+"time_proxy_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"time_proxy_ut" end time: Aug 07 08:19 IST
+"time_proxy_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/core/singleton/singleton_ut/singleton_ut
+5/43 Testing: singleton_ut
+5/43 Test: singleton_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/core/singleton/singleton_ut
+"singleton_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"singleton_ut" end time: Aug 07 08:19 IST
+"singleton_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/core/buffers/buffers_ut/buffers_ut
+6/43 Testing: buffers_ut
+6/43 Test: buffers_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/core/buffers/buffers_ut
+"buffers_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"buffers_ut" end time: Aug 07 08:19 IST
+"buffers_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/core/mainloop/mainloop_ut/mainloop_ut
+7/43 Testing: mainloop_ut
+7/43 Test: mainloop_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/core/mainloop/mainloop_ut
+"mainloop_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"mainloop_ut" end time: Aug 07 08:19 IST
+"mainloop_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/core/environment/environment_ut/environment_ut
+8/43 Testing: environment_ut
+8/43 Test: environment_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/core/environment/environment_ut
+"environment_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"environment_ut" end time: Aug 07 08:19 IST
+"environment_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/core/rest/rest_ut/rest_server_ut
+9/43 Testing: rest_server_ut
+9/43 Test: rest_server_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/core/rest/rest_ut
+"rest_server_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"rest_server_ut" end time: Aug 07 08:19 IST
+"rest_server_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/core/report/report_ut/report_ut
+10/43 Testing: report_ut
+10/43 Test: report_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/core/report/report_ut
+"report_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"report_ut" end time: Aug 07 08:19 IST
+"report_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/core/logging/logging_ut/logging_ut
+11/43 Testing: logging_ut
+11/43 Test: logging_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/core/logging/logging_ut
+"logging_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"logging_ut" end time: Aug 07 08:19 IST
+"logging_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/core/messaging/messaging_comp/messaging_comp_ut/messaging_comp_ut
+12/43 Testing: messaging_comp_ut
+12/43 Test: messaging_comp_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/core/messaging/messaging_comp/messaging_comp_ut
+"messaging_comp_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"messaging_comp_ut" end time: Aug 07 08:19 IST
+"messaging_comp_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/core/messaging/connection/connection_ut/connection_comp_ut
+13/43 Testing: connection_comp_ut
+13/43 Test: connection_comp_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/core/messaging/connection/connection_ut
+"connection_comp_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"connection_comp_ut" end time: Aug 07 08:19 IST
+"connection_comp_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/core/messaging/messaging_buffer_comp/messaging_buffer_comp_ut/messaging_buffer_comp_ut
+14/43 Testing: messaging_buffer_comp_ut
+14/43 Test: messaging_buffer_comp_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/core/messaging/messaging_buffer_comp/messaging_buffer_comp_ut
+"messaging_buffer_comp_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"messaging_buffer_comp_ut" end time: Aug 07 08:19 IST
+"messaging_buffer_comp_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/core/agent_details/agent_details_ut/agent_details_ut
+15/43 Testing: agent_details_ut
+15/43 Test: agent_details_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/core/agent_details/agent_details_ut
+"agent_details_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"agent_details_ut" end time: Aug 07 08:19 IST
+"agent_details_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/core/event_is/event_ut/event_ut
+16/43 Testing: event_ut
+16/43 Test: event_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/core/event_is/event_ut
+"event_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"event_ut" end time: Aug 07 08:19 IST
+"event_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/core/encryptor/encryptor_ut/encryptor_ut
+17/43 Testing: encryptor_ut
+17/43 Test: encryptor_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/core/encryptor/encryptor_ut
+"encryptor_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"encryptor_ut" end time: Aug 07 08:19 IST
+"encryptor_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/core/cpu/cpu_ut/cpu_ut
+18/43 Testing: cpu_ut
+18/43 Test: cpu_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/core/cpu/cpu_ut
+"cpu_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"cpu_ut" end time: Aug 07 08:19 IST
+"cpu_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/core/memory_consumption/memory_consumption_ut/memory_consumption_ut
+19/43 Testing: memory_consumption_ut
+19/43 Test: memory_consumption_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/core/memory_consumption/memory_consumption_ut
+"memory_consumption_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"memory_consumption_ut" end time: Aug 07 08:19 IST
+"memory_consumption_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/core/shmem_ipc/shmem_ipc_ut/shared_ring_queue_ut
+20/43 Testing: shared_ring_queue_ut
+20/43 Test: shared_ring_queue_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/core/shmem_ipc/shmem_ipc_ut
+"shared_ring_queue_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"shared_ring_queue_ut" end time: Aug 07 08:19 IST
+"shared_ring_queue_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/core/shmem_ipc/shmem_ipc_ut/shared_ipc_ut
+21/43 Testing: shared_ipc_ut
+21/43 Test: shared_ipc_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/core/shmem_ipc/shmem_ipc_ut
+"shared_ipc_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"shared_ipc_ut" end time: Aug 07 08:19 IST
+"shared_ipc_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/core/shm_pkt_queue/shm_pkt_queue_ut/shm_pkt_queue_ut
+22/43 Testing: shm_pkt_queue_ut
+22/43 Test: shm_pkt_queue_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/core/shm_pkt_queue/shm_pkt_queue_ut
+"shm_pkt_queue_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"shm_pkt_queue_ut" end time: Aug 07 08:19 IST
+"shm_pkt_queue_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/core/instance_awareness/instance_awareness_ut/instance_awareness_ut
+23/43 Testing: instance_awareness_ut
+23/43 Test: instance_awareness_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/core/instance_awareness/instance_awareness_ut
+"instance_awareness_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"instance_awareness_ut" end time: Aug 07 08:19 IST
+"instance_awareness_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/core/agent_details_reporter/agent_details_reporter_ut/agent_details_reporter_ut
+24/43 Testing: agent_details_reporter_ut
+24/43 Test: agent_details_reporter_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/core/agent_details_reporter/agent_details_reporter_ut
+"agent_details_reporter_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"agent_details_reporter_ut" end time: Aug 07 08:19 IST
+"agent_details_reporter_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/core/metric/metric_ut/metric_ut
+25/43 Testing: metric_ut
+25/43 Test: metric_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/core/metric/metric_ut
+"metric_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"metric_ut" end time: Aug 07 08:19 IST
+"metric_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/core/version/version_ut/version_ut
+26/43 Testing: version_ut
+26/43 Test: version_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/core/version/version_ut
+"version_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"version_ut" end time: Aug 07 08:19 IST
+"version_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/core/compression/compression_utils_ut/compression_utils_ut
+27/43 Testing: compression_utils_ut
+27/43 Test: compression_utils_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/core/compression/compression_utils_ut
+"compression_utils_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"compression_utils_ut" end time: Aug 07 08:19 IST
+"compression_utils_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/core/attachments/http_configuration/http_configuration_ut/http_configuration_ut
+28/43 Testing: http_configuration_ut
+28/43 Test: http_configuration_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/core/attachments/http_configuration/http_configuration_ut
+"http_configuration_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"http_configuration_ut" end time: Aug 07 08:19 IST
+"http_configuration_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/core/report_messaging/report_messaging_ut/report_messaging_ut
+29/43 Testing: report_messaging_ut
+29/43 Test: report_messaging_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/core/report_messaging/report_messaging_ut
+"report_messaging_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"report_messaging_ut" end time: Aug 07 08:19 IST
+"report_messaging_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/core/core_ut/core_ut
+30/43 Testing: core_ut
+30/43 Test: core_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/core/core_ut
+"core_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"core_ut" end time: Aug 07 08:19 IST
+"core_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/attachments/nginx/nginx_attachment_util/nginx_attachment_util_ut/nginx_attachment_util_ut
+31/43 Testing: nginx_attachment_util_ut
+31/43 Test: nginx_attachment_util_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/attachments/nginx/nginx_attachment_util/nginx_attachment_util_ut
+"nginx_attachment_util_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"nginx_attachment_util_ut" end time: Aug 07 08:19 IST
+"nginx_attachment_util_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/components/gradual_deployment/gradual_deployment_ut/gradual_deployment_ut
+32/43 Testing: gradual_deployment_ut
+32/43 Test: gradual_deployment_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/components/gradual_deployment/gradual_deployment_ut
+"gradual_deployment_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"gradual_deployment_ut" end time: Aug 07 08:19 IST
+"gradual_deployment_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/components/packet/packet_ut/packet_ut
+33/43 Testing: packet_ut
+33/43 Test: packet_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/components/packet/packet_ut
+"packet_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"packet_ut" end time: Aug 07 08:19 IST
+"packet_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/components/pending_key/pending_key_ut/pending_key_ut
+34/43 Testing: pending_key_ut
+34/43 Test: pending_key_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/components/pending_key/pending_key_ut
+"pending_key_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"pending_key_ut" end time: Aug 07 08:19 IST
+"pending_key_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/components/utils/http_transaction_data/http_transaction_data_ut/http_transaction_data_ut
+35/43 Testing: http_transaction_data_ut
+35/43 Test: http_transaction_data_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/components/utils/http_transaction_data/http_transaction_data_ut
+"http_transaction_data_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"http_transaction_data_ut" end time: Aug 07 08:19 IST
+"http_transaction_data_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/components/utils/keywords/keywords_ut/keywords_ut
+36/43 Testing: keywords_ut
+36/43 Test: keywords_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/components/utils/keywords/keywords_ut
+"keywords_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"keywords_ut" end time: Aug 07 08:19 IST
+"keywords_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/components/utils/pm/pm_ut/pm_ut
+37/43 Testing: pm_ut
+37/43 Test: pm_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/components/utils/pm/pm_ut
+"pm_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"pm_ut" end time: Aug 07 08:19 IST
+"pm_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/components/utils/service_health_status/service_health_status_ut/service_health_status_ut
+38/43 Testing: service_health_status_ut
+38/43 Test: service_health_status_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/components/utils/service_health_status/service_health_status_ut
+"service_health_status_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"service_health_status_ut" end time: Aug 07 08:19 IST
+"service_health_status_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/components/security_apps/ips/ips_ut/ips_ut
+39/43 Testing: ips_ut
+39/43 Test: ips_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/components/security_apps/ips/ips_ut
+"ips_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"ips_ut" end time: Aug 07 08:19 IST
+"ips_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/components/security_apps/layer_7_access_control/layer_7_access_control_ut/layer_7_access_control_ut
+40/43 Testing: layer_7_access_control_ut
+40/43 Test: layer_7_access_control_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/components/security_apps/layer_7_access_control/layer_7_access_control_ut
+"layer_7_access_control_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"layer_7_access_control_ut" end time: Aug 07 08:19 IST
+"layer_7_access_control_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/components/security_apps/orchestration/health_check/health_check_ut/health_check_ut
+41/43 Testing: health_check_ut
+41/43 Test: health_check_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/components/security_apps/orchestration/health_check/health_check_ut
+"health_check_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"health_check_ut" end time: Aug 07 08:19 IST
+"health_check_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/components/security_apps/orchestration/external_sdk_server/external_sdk_server_ut/external_sdk_server_ut
+42/43 Testing: external_sdk_server_ut
+42/43 Test: external_sdk_server_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/components/security_apps/orchestration/external_sdk_server/external_sdk_server_ut
+"external_sdk_server_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"external_sdk_server_ut" end time: Aug 07 08:19 IST
+"external_sdk_server_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/Kritish/Development/verifierwall/build/components/security_apps/prometheus/prometheus_ut/prometheus_ut
+43/43 Testing: prometheus_ut
+43/43 Test: prometheus_ut
+Command: ""
+Directory: /home/Kritish/Development/verifierwall/build/components/security_apps/prometheus/prometheus_ut
+"prometheus_ut" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"prometheus_ut" end time: Aug 07 08:19 IST
+"prometheus_ut" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Aug 07 08:19 IST

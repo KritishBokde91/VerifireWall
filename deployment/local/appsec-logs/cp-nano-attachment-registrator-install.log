@@ -1,0 +1,8 @@
+Starting installation of Check Point Attachment Registrator Nano service [Fri Aug  7 17:46:05 UTC 2026]
+
+Installation completed successfully.
+Starting installation of Check Point Attachment Registrator Nano service [Sat Aug  8 03:09:19 UTC 2026]
+
+Unregistering /etc/cp/attachmentRegistrator/cp-nano-attachment-registrator (pid=471)
+sh: can't kill pid 471: No such process
+Installation completed successfully.
