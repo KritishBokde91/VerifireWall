@@ -1,14 +1,14 @@
 {
-    "Last update attempt": "2026-08-08T08:22:13.260843",
+    "Last update attempt": "2026-08-08T08:24:52.743547",
     "Last update status": "Succeeded ",
-    "Last update": "2026-08-08T08:22:13.278337",
+    "Last update": "2026-08-08T08:24:52.760710",
     "Last manifest update": "2026-08-08T03:10:39.775040",
     "Policy version": "b347da898fe401e3e85e6af4ecfa03702e9f43dbde941e5f4bf1e0ce9489a125",
     "Last policy update": "2026-08-08T03:10:39.775040",
     "Last settings update": "None",
     "Upgrade mode": "None",
     "Fog address": "https://inext-agents.cloud.ngen.checkpoint.com",
-    "Registration status": "Succeeded ",
+    "Registration status": "Failed. Reason: Warning: Agent/Gateway failed to receive access token. Contact Check Point support.",
     "Registration details": {
         "Name": "8baf295cc6a4",
         "Type": "Docker",

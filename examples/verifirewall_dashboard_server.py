@@ -35,24 +35,6 @@ stats = {
     "recent_events": []
 }
 
-# Global state for security analytics
-stats = {
-    "total_requests": 0,
-    "total_blocked": 0,
-    "total_allowed": 0,
-    "attack_types": {
-        "Legitimate Traffic": 0,
-        "SQL Injection": 0,
-        "Cross Site Scripting": 0,
-        "Command Injection": 0,
-        "Path Traversal": 0,
-        "Remote Code Execution": 0,
-        "Reconnaissance / Probing": 0,
-        "General Anomaly": 0
-    },
-    "recent_events": []
-}
-
 lock = threading.Lock()
 
 def parse_nginx_log_line(line):
@@ -259,253 +241,982 @@ def log_streamer_thread():
     t2.start()
 
 
-
-
 HTML_PAGE = """<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VeriFireWall — Real-Time AI Security Analytics</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>VeriFireWall — AI Security & Anomaly Telemetry</title>
+    <!-- Google Fonts: Space Grotesk, Plus Jakarta Sans, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <style>
         :root {
-            --bg-dark: #0b0f19;
-            --card-bg: rgba(23, 31, 51, 0.7);
-            --border-color: rgba(255, 255, 255, 0.08);
-            --accent-red: #ff4757;
-            --accent-green: #2ed573;
-            --accent-blue: #1e90ff;
-            --accent-amber: #ffa502;
-            --accent-purple: #9b59b6;
-            --text-main: #f1f2f6;
-            --text-muted: #a4b0be;
+            --bg-paper: #f4f3ee;
+            --bg-card: #ffffff;
+            --border-dark: #18181b;
+            --border-width: 2.5px;
+            --shadow-neo: 4px 4px 0px #18181b;
+            --shadow-neo-sm: 2.5px 2.5px 0px #18181b;
+            --shadow-neo-hover: 6px 6px 0px #18181b;
+            --shadow-neo-active: 1px 1px 0px #18181b;
+            
+            --neo-red: #ff4757;
+            --neo-red-light: #ffe5e8;
+            --neo-green: #10b981;
+            --neo-green-light: #d1fae5;
+            --neo-blue: #3b82f6;
+            --neo-blue-light: #dbeafe;
+            --neo-yellow: #fbbf24;
+            --neo-yellow-light: #fef3c7;
+            --neo-purple: #8b5cf6;
+            --neo-purple-light: #ede9fe;
+            --neo-pink: #ec4899;
+            --neo-pink-light: #fce7f3;
+
+            --text-dark: #09090b;
+            --text-muted: #52525b;
+            --radius-neo: 8px;
+            --radius-btn: 6px;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
-            font-family: 'Outfit', sans-serif;
-            background: var(--bg-dark);
-            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background-color: var(--bg-paper);
+            color: var(--text-dark);
             padding: 24px;
             min-height: 100vh;
+            line-height: 1.5;
+            background-image: radial-gradient(#d4d4d8 1px, transparent 1px);
+            background-size: 20px 20px;
         }
-        .header {
+
+        /* Top Header Navigation */
+        .navbar {
+            background: var(--bg-card);
+            border: var(--border-width) solid var(--border-dark);
+            box-shadow: var(--shadow-neo);
+            border-radius: var(--radius-neo);
+            padding: 16px 24px;
+            margin-bottom: 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 24px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid var(--border-color);
+            flex-wrap: wrap;
+            gap: 16px;
         }
-        .logo-title {
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .brand-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--neo-yellow);
+            border: var(--border-width) solid var(--border-dark);
+            box-shadow: 2px 2px 0px var(--border-dark);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .brand-title h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: var(--text-dark);
+            line-height: 1.1;
+        }
+
+        .brand-title span {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .controls-group {
             display: flex;
             align-items: center;
             gap: 12px;
+            flex-wrap: wrap;
         }
-        .logo-title h1 {
-            font-size: 24px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #ff4757, #ffa502);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .badge-live {
-            background: rgba(46, 213, 115, 0.15);
-            color: var(--accent-green);
-            border: 1px solid var(--accent-green);
-            padding: 4px 12px;
+
+        .live-status-pill {
+            background: var(--neo-green-light);
+            color: #065f46;
+            border: var(--border-width) solid var(--border-dark);
+            box-shadow: 2px 2px 0px var(--border-dark);
+            padding: 6px 14px;
             border-radius: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .live-status-pill.paused {
+            background: var(--neo-yellow-light);
+            color: #92400e;
+        }
+
+        .pulse-dot {
+            width: 10px;
+            height: 10px;
+            background: var(--neo-green);
+            border: 1.5px solid var(--border-dark);
+            border-radius: 50%;
+            animation: pulse-ring 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+
+        .live-status-pill.paused .pulse-dot {
+            background: var(--neo-yellow);
+            animation: none;
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1.1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        /* Buttons Neo-Brutalist Style */
+        .btn-neo {
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 13px;
+            font-weight: 700;
+            padding: 8px 16px;
+            background: var(--bg-card);
+            color: var(--text-dark);
+            border: var(--border-width) solid var(--border-dark);
+            box-shadow: var(--shadow-neo-sm);
+            border-radius: var(--radius-btn);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            user-select: none;
+            transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.2s ease;
+        }
+
+        .btn-neo:hover {
+            transform: translate(-1px, -1px);
+            box-shadow: 3.5px 3.5px 0px var(--border-dark);
+            background-color: #fafafa;
+        }
+
+        .btn-neo:active {
+            transform: translate(1.5px, 1.5px);
+            box-shadow: var(--shadow-neo-active);
+        }
+
+        .btn-neo.btn-primary {
+            background: var(--neo-blue-light);
+            color: #1e40af;
+        }
+
+        .btn-neo.btn-danger {
+            background: var(--neo-red-light);
+            color: #991b1b;
+        }
+
+        .btn-neo.btn-purple {
+            background: var(--neo-purple-light);
+            color: #5b21b6;
+        }
+
+        .btn-neo.active {
+            background: var(--neo-yellow);
+            box-shadow: var(--shadow-neo-active);
+            transform: translate(1.5px, 1.5px);
+        }
+
+        /* Metrics Cards Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .metric-card {
+            background: var(--bg-card);
+            border: var(--border-width) solid var(--border-dark);
+            box-shadow: var(--shadow-neo);
+            border-radius: var(--radius-neo);
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .metric-card:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: var(--shadow-neo-hover);
+        }
+
+        .metric-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .metric-title {
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: var(--text-muted);
+        }
+
+        .metric-icon-badge {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            border: 2px solid var(--border-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .metric-card.blue .metric-icon-badge { background: var(--neo-blue-light); color: #1d4ed8; }
+        .metric-card.red .metric-icon-badge { background: var(--neo-red-light); color: #dc2626; }
+        .metric-card.green .metric-icon-badge { background: var(--neo-green-light); color: #059669; }
+        .metric-card.yellow .metric-icon-badge { background: var(--neo-yellow-light); color: #d97706; }
+
+        .metric-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 34px;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        .metric-sub {
+            font-size: 12px;
             font-weight: 600;
             display: flex;
             align-items: center;
             gap: 6px;
         }
-        .badge-live::before {
-            content: '';
-            width: 8px;
-            height: 8px;
-            background: var(--accent-green);
-            border-radius: 50%;
+
+        .tag-pill {
             display: inline-block;
-            box-shadow: 0 0 10px var(--accent-green);
-            animation: pulse 1.5s infinite;
-        }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
-
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-        }
-        .card-label {
-            font-size: 14px;
-            color: var(--text-muted);
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-        .card-value {
-            font-size: 32px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
             font-weight: 700;
-            font-family: 'JetBrains Mono', monospace;
+            border: 1.5px solid var(--border-dark);
         }
-        .card-value.red { color: var(--accent-red); }
-        .card-value.green { color: var(--accent-green); }
-        .card-value.blue { color: var(--accent-blue); }
-        .card-value.amber { color: var(--accent-amber); }
 
-        .charts-row {
+        .tag-pill.red { background: var(--neo-red-light); color: #b91c1c; }
+        .tag-pill.green { background: var(--neo-green-light); color: #047857; }
+        .tag-pill.blue { background: var(--neo-blue-light); color: #1d4ed8; }
+        .tag-pill.yellow { background: var(--neo-yellow-light); color: #b45309; }
+
+        /* Charts Row */
+        .charts-grid {
             display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 16px;
+            grid-template-columns: 1fr 1.6fr;
+            gap: 20px;
             margin-bottom: 24px;
         }
-        .chart-container {
-            position: relative;
-            height: 260px;
-            width: 100%;
+
+        @media (max-width: 900px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
-        .table-section {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
+        .chart-box {
+            background: var(--bg-card);
+            border: var(--border-width) solid var(--border-dark);
+            box-shadow: var(--shadow-neo);
+            border-radius: var(--radius-neo);
             padding: 20px;
         }
-        .table-section h2 {
-            font-size: 18px;
+
+        .chart-box-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
             margin-bottom: 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        table {
+
+        .chart-container-inner {
+            position: relative;
+            height: 250px;
             width: 100%;
-            border-collapse: collapse;
-            font-size: 14px;
         }
-        th, td {
-            padding: 12px 16px;
-            text-align: left;
-            border-bottom: 1px solid var(--border-color);
+
+        /* Telemetry Section & Filters */
+        .telemetry-section {
+            background: var(--bg-card);
+            border: var(--border-width) solid var(--border-dark);
+            box-shadow: var(--shadow-neo);
+            border-radius: var(--radius-neo);
+            padding: 20px;
         }
-        th {
-            color: var(--text-muted);
+
+        .telemetry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .telemetry-title-area h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .filter-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            width: 100%;
+            background: var(--bg-paper);
+            padding: 12px;
+            border: var(--border-width) solid var(--border-dark);
+            border-radius: var(--radius-neo);
+            margin-bottom: 16px;
+        }
+
+        .search-input-wrap {
+            flex: 1;
+            min-width: 220px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 13px;
             font-weight: 600;
-            text-transform: uppercase;
-            font-size: 12px;
-            letter-spacing: 0.5px;
+            padding: 8px 12px 8px 34px;
+            background: #ffffff;
+            border: 2px solid var(--border-dark);
+            border-radius: var(--radius-btn);
+            box-shadow: 2px 2px 0px var(--border-dark);
+            outline: none;
+            transition: all 0.15s ease;
         }
-        tr:hover { background: rgba(255, 255, 255, 0.02); }
-        .status-pill {
-            padding: 4px 10px;
-            border-radius: 12px;
+
+        .search-input:focus {
+            border-color: var(--neo-blue);
+            box-shadow: 3px 3px 0px var(--border-dark);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        .filter-select {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 8px 12px;
+            background: #ffffff;
+            border: 2px solid var(--border-dark);
+            border-radius: var(--radius-btn);
+            box-shadow: 2px 2px 0px var(--border-dark);
+            outline: none;
+            cursor: pointer;
+        }
+
+        .filter-pills {
+            display: flex;
+            gap: 6px;
+        }
+
+        .filter-pill-btn {
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 12px;
             font-weight: 700;
-            display: inline-block;
+            padding: 6px 12px;
+            border: 2px solid var(--border-dark);
+            border-radius: 20px;
+            background: #ffffff;
+            box-shadow: 1.5px 1.5px 0px var(--border-dark);
+            cursor: pointer;
+            transition: all 0.1s ease;
         }
-        .status-pill.blocked {
-            background: rgba(255, 71, 87, 0.2);
-            color: var(--accent-red);
-            border: 1px solid var(--accent-red);
+
+        .filter-pill-btn.active {
+            background: var(--border-dark);
+            color: #ffffff;
+            box-shadow: none;
         }
-        .status-pill.allowed {
-            background: rgba(46, 213, 115, 0.2);
-            color: var(--accent-green);
-            border: 1px solid var(--accent-green);
+
+        /* Table Styling */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            border: var(--border-width) solid var(--border-dark);
+            border-radius: 6px;
         }
-        .attack-tag {
-            background: rgba(30, 144, 255, 0.15);
-            color: #70a1ff;
-            padding: 2px 8px;
-            border-radius: 4px;
+
+        table.neo-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            background: #ffffff;
+            text-align: left;
+        }
+
+        table.neo-table th {
+            background: #f4f4f5;
+            color: var(--text-dark);
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 12px 14px;
+            border-bottom: var(--border-width) solid var(--border-dark);
+            border-right: 1px solid #e4e4e7;
+        }
+
+        table.neo-table th:last-child {
+            border-right: none;
+        }
+
+        table.neo-table td {
+            padding: 12px 14px;
+            border-bottom: 1px solid #e4e4e7;
+            border-right: 1px solid #e4e4e7;
+            vertical-align: middle;
+            transition: background-color 0.15s ease;
+        }
+
+        table.neo-table td:last-child {
+            border-right: none;
+        }
+
+        table.neo-table tr:hover td {
+            background-color: #fdfef2;
+        }
+
+        table.neo-table tr.row-blocked td {
+            background-color: #fff8f8;
+        }
+
+        table.neo-table tr.row-blocked:hover td {
+            background-color: #fee2e2;
+        }
+
+        .mono {
             font-family: 'JetBrains Mono', monospace;
             font-size: 12px;
         }
-        .mono { font-family: 'JetBrains Mono', monospace; font-size: 13px; }
+
+        .badge-action {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 4px;
+            border: 1.5px solid var(--border-dark);
+            box-shadow: 1px 1px 0px var(--border-dark);
+        }
+
+        .badge-action.blocked {
+            background: var(--neo-red);
+            color: #ffffff;
+        }
+
+        .badge-action.allowed {
+            background: var(--neo-green);
+            color: #ffffff;
+        }
+
+        .vector-tag {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: var(--neo-blue-light);
+            color: #1e3a8a;
+            border: 1px solid #93c5fd;
+        }
+
+        .sample-preview {
+            max-width: 220px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: #b45309;
+            background: #fffbeb;
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid #fde68a;
+        }
+
+        .score-bar-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .score-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            min-width: 28px;
+        }
+
+        .score-bar {
+            flex: 1;
+            height: 6px;
+            background: #e4e4e7;
+            border-radius: 3px;
+            overflow: hidden;
+            border: 1px solid var(--border-dark);
+        }
+
+        .score-bar-inner {
+            height: 100%;
+            background: var(--neo-red);
+            border-radius: 3px;
+        }
+
+        /* Modal Details Inspector */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(9, 9, 11, 0.5);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+            padding: 20px;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            background: #ffffff;
+            border: var(--border-width) solid var(--border-dark);
+            box-shadow: 8px 8px 0px var(--border-dark);
+            border-radius: var(--radius-neo);
+            width: 100%;
+            max-width: 650px;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: scale(0.95);
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-overlay.open .modal-card {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            padding: 16px 20px;
+            background: var(--neo-yellow-light);
+            border-bottom: var(--border-width) solid var(--border-dark);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .modal-close {
+            background: #ffffff;
+            border: 2px solid var(--border-dark);
+            box-shadow: 2px 2px 0px var(--border-dark);
+            width: 28px;
+            height: 28px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            background: var(--neo-red-light);
+            color: #dc2626;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .modal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .modal-field {
+            background: var(--bg-paper);
+            border: 1.5px solid var(--border-dark);
+            padding: 10px 12px;
+            border-radius: 6px;
+        }
+
+        .modal-field label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .modal-field val {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            font-weight: 600;
+            word-break: break-all;
+            display: block;
+        }
+
+        .modal-full-box {
+            background: #18181b;
+            color: #a1a1aa;
+            border: 2px solid var(--border-dark);
+            border-radius: 6px;
+            padding: 14px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            max-height: 180px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        /* Footer */
+        .footer-bar {
+            margin-top: 24px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="logo-title">
-            <h1>🛡️ VeriFireWall AI Attack & Anomaly Telemetry</h1>
+
+    <!-- Header Navbar -->
+    <div class="navbar">
+        <div class="brand">
+            <div class="brand-icon">🛡️</div>
+            <div class="brand-title">
+                <h1>VERIFIREWALL</h1>
+                <span>AI Security Telemetry Dashboard</span>
+            </div>
         </div>
-        <div class="badge-live">LIVE MONITORING</div>
+
+        <div class="controls-group">
+            <div class="live-status-pill" id="live-status-pill">
+                <span class="pulse-dot"></span>
+                <span id="live-status-text">LIVE TELEMETRY STREAM</span>
+            </div>
+
+            <button class="btn-neo btn-primary" id="btn-pause-toggle" onclick="togglePause()">
+                <span id="pause-icon">⏸</span> <span id="pause-label">Pause Stream</span>
+            </button>
+
+            <button class="btn-neo" onclick="fetchMetrics(true)">
+                🔄 Force Refresh
+            </button>
+
+            <button class="btn-neo btn-purple" onclick="exportToCSV()">
+                📥 Export CSV
+            </button>
+
+            <button class="btn-neo" id="btn-sound-toggle" onclick="toggleSoundAlert()">
+                <span id="sound-icon">🔇</span> Sound: Off
+            </button>
+        </div>
     </div>
 
+    <!-- Metrics Grid -->
     <div class="metrics-grid">
-        <div class="card">
-            <div class="card-label">Total Requests Analyzed</div>
-            <div class="card-value blue" id="total-reqs">0</div>
+        <div class="metric-card blue">
+            <div class="metric-header">
+                <span class="metric-title">Total Requests Inspected</span>
+                <div class="metric-icon-badge">📊</div>
+            </div>
+            <div class="metric-value" id="metric-total">0</div>
+            <div class="metric-sub">
+                <span class="tag-pill blue">WAF Engine Core</span>
+                <span>Active Inspection</span>
+            </div>
         </div>
-        <div class="card">
-            <div class="card-label">Attacks Blocked (Prevent)</div>
-            <div class="card-value red" id="total-blocked">0</div>
+
+        <div class="metric-card red">
+            <div class="metric-header">
+                <span class="metric-title">Attacks Enforced (Blocked)</span>
+                <div class="metric-icon-badge">🚫</div>
+            </div>
+            <div class="metric-value" id="metric-blocked">0</div>
+            <div class="metric-sub">
+                <span class="tag-pill red" id="block-rate-pill">0% Block Rate</span>
+                <span>Security Action: Prevent</span>
+            </div>
         </div>
-        <div class="card">
-            <div class="card-label">Legitimate Traffic (Allowed)</div>
-            <div class="card-value green" id="total-allowed">0</div>
+
+        <div class="metric-card green">
+            <div class="metric-header">
+                <span class="metric-title">Legitimate Requests (Allowed)</span>
+                <div class="metric-icon-badge">✅</div>
+            </div>
+            <div class="metric-value" id="metric-allowed">0</div>
+            <div class="metric-sub">
+                <span class="tag-pill green" id="clean-rate-pill">100% Clean</span>
+                <span>Passed Inspection</span>
+            </div>
         </div>
-        <div class="card">
-            <div class="card-label">Engine Defense Mode</div>
-            <div class="card-value amber">PREVENT</div>
+
+        <div class="metric-card yellow">
+            <div class="metric-header">
+                <span class="metric-title">Engine Defense Mode</span>
+                <div class="metric-icon-badge">⚡</div>
+            </div>
+            <div class="metric-value" style="font-size: 26px;">PREVENT</div>
+            <div class="metric-sub">
+                <span class="tag-pill yellow">Autonomous ML</span>
+                <span>Real-Time Anomaly Scoring</span>
+            </div>
         </div>
     </div>
 
-    <div class="charts-row">
-        <div class="card">
-            <div class="card-label" style="margin-bottom:16px;">Attack Types Breakdown</div>
-            <div class="chart-container">
+    <!-- Charts Row -->
+    <div class="charts-grid">
+        <div class="chart-box">
+            <div class="chart-box-title">
+                <span>🎯 Attack Types Breakdown</span>
+                <span style="font-size: 12px; color: var(--text-muted); font-weight: normal;" id="chart-pie-total">0 types</span>
+            </div>
+            <div class="chart-container-inner">
                 <canvas id="attackPieChart"></canvas>
             </div>
         </div>
-        <div class="card">
-            <div class="card-label" style="margin-bottom:16px;">Security Decision Ratio</div>
-            <div class="chart-container">
+
+        <div class="chart-box">
+            <div class="chart-box-title">
+                <span>📈 Security Decision Telemetry Ratio</span>
+                <span style="font-size: 12px; color: var(--text-muted); font-weight: normal;">Blocked vs Allowed</span>
+            </div>
+            <div class="chart-container-inner">
                 <canvas id="decisionBarChart"></canvas>
             </div>
         </div>
     </div>
 
-    <div class="table-section">
-        <h2>
-            <span>🚨 Live Security Incidents & Threat Telemetry</span>
-            <span style="font-size:13px; color:var(--text-muted); font-weight:normal;" id="event-count">0 events</span>
-        </h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Time</th>
-                    <th>Source IP</th>
-                    <th>Method & URI</th>
-                    <th>Attack Vector</th>
-                    <th>Action</th>
-                    <th>ML Anomaly Score</th>
-                    <th>Matched Pattern / Sample</th>
-                </tr>
-            </thead>
-            <tbody id="events-tbody">
-                <tr><td colspan="7" style="text-align:center; color:var(--text-muted);">Waiting for security events...</td></tr>
-            </tbody>
-        </table>
+    <!-- Telemetry Log Table Section -->
+    <div class="telemetry-section">
+        <div class="telemetry-header">
+            <div class="telemetry-title-area">
+                <h2>🚨 Live Security Incident Stream</h2>
+            </div>
+            <div style="font-size: 13px; font-weight: 700; color: var(--text-muted);" id="incident-count-label">
+                0 Incidents Logged
+            </div>
+        </div>
+
+        <!-- Filter & Search Controls -->
+        <div class="filter-bar">
+            <div class="search-input-wrap">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="search-box" class="search-input" placeholder="Filter by IP, URI, Method, or Pattern sample..." oninput="applyFilters()">
+            </div>
+
+            <div class="filter-pills">
+                <button class="filter-pill-btn active" id="btn-filter-all" onclick="setActionFilter('ALL')">All</button>
+                <button class="filter-pill-btn" id="btn-filter-blocked" onclick="setActionFilter('BLOCKED')">Blocked Only</button>
+                <button class="filter-pill-btn" id="btn-filter-allowed" onclick="setActionFilter('ALLOWED')">Allowed Only</button>
+            </div>
+
+            <select id="attack-type-select" class="filter-select" onchange="applyFilters()">
+                <option value="ALL">All Incident Types</option>
+                <option value="SQL Injection">SQL Injection</option>
+                <option value="Cross Site Scripting">Cross Site Scripting</option>
+                <option value="Command Injection">Command Injection</option>
+                <option value="Path Traversal">Path Traversal</option>
+                <option value="Remote Code Execution">Remote Code Execution</option>
+                <option value="Reconnaissance / Probing">Recon / Probing</option>
+                <option value="Legitimate Traffic">Legitimate Traffic</option>
+            </select>
+        </div>
+
+        <!-- Events Table -->
+        <div class="table-responsive">
+            <table class="neo-table">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Source IP</th>
+                        <th>Method & URI</th>
+                        <th>Attack Vector</th>
+                        <th>Action</th>
+                        <th>ML Score</th>
+                        <th>Matched Pattern / Sample</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody id="events-tbody">
+                    <tr>
+                        <td colspan="8" style="text-align:center; padding: 30px; color: var(--text-muted); font-weight: 600;">
+                            ⚡ VeriFireWall Telemetry Active — Listening for web traffic events...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
+    <!-- Footer Bar -->
+    <div class="footer-bar">
+        <div>🛡️ <strong>VeriFireWall Core v1.1.35</strong> — Real-Time WAAP Engine</div>
+        <div id="last-updated-tag">Last Polled: Never</div>
+    </div>
+
+    <!-- Incident Inspector Modal -->
+    <div class="modal-overlay" id="inspector-modal" onclick="closeModalOnBackdrop(event)">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>🔍 Incident Telemetry Inspector</h3>
+                <button class="modal-close" onclick="closeInspectorModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-grid">
+                    <div class="modal-field">
+                        <label>Incident Reference ID</label>
+                        <val id="modal-id">-</val>
+                    </div>
+                    <div class="modal-field">
+                        <label>Timestamp</label>
+                        <val id="modal-time">-</val>
+                    </div>
+                    <div class="modal-field">
+                        <label>Source IP</label>
+                        <val id="modal-ip">-</val>
+                    </div>
+                    <div class="modal-field">
+                        <label>Security Action</label>
+                        <val id="modal-action">-</val>
+                    </div>
+                    <div class="modal-field">
+                        <label>Attack Category</label>
+                        <val id="modal-vector">-</val>
+                    </div>
+                    <div class="modal-field">
+                        <label>ML Anomaly Score</label>
+                        <val id="modal-score">-</val>
+                    </div>
+                </div>
+
+                <div class="modal-field" style="margin-bottom: 16px;">
+                    <label>HTTP Request URI</label>
+                    <val id="modal-uri">-</val>
+                </div>
+
+                <div class="modal-field" style="margin-bottom: 16px;">
+                    <label>Matched Pattern / WAF Sample</label>
+                    <val id="modal-sample" style="color: var(--neo-red);">-</val>
+                </div>
+
+                <div style="margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center;">
+                    <label style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--text-muted);">Raw Event Payload</label>
+                    <button class="btn-neo" style="padding: 2px 8px; font-size: 11px;" onclick="copyRawJson()">📋 Copy JSON</button>
+                </div>
+                <div class="modal-full-box" id="modal-raw-json">{}</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Application Logic -->
     <script>
-        // Disable browser alert popups completely
+        // Disable default browser alert dialogs
         window.alert = function() {};
 
+        // State variables
+        let isPaused = false;
+        let isSoundOn = false;
+        let activeActionFilter = 'ALL';
+        let rawEventsList = [];
+        let previousBlockedCount = 0;
+        let pieChart = null;
+        let barChart = null;
+        let currentModalEvent = null;
+
+        // Escape HTML helper
         function escapeHtml(str) {
-            if (!str) return '';
+            if (str === null || str === undefined) return '';
             return String(str)
                 .replace(/&/g, "&amp;")
                 .replace(/</g, "&lt;")
@@ -514,104 +1225,403 @@ HTML_PAGE = """<!DOCTYPE html>
                 .replace(/'/g, "&#039;");
         }
 
-        let pieChart, barChart;
-
+        // Initialize Neo-Brutalist Styled Chart.js Visualizations cleanly
         function initCharts() {
-            const ctxPie = document.getElementById('attackPieChart').getContext('2d');
-            pieChart = new Chart(ctxPie, {
-                type: 'doughnut',
-                data: {
-                    labels: ['SQLi', 'XSS', 'CmdInj', 'PathTrav', 'RCE', 'Probing'],
-                    datasets: [{
-                        data: [0, 0, 0, 0, 0, 0],
-                        backgroundColor: ['#ff4757', '#ffa502', '#1e90ff', '#9b59b6', '#ff6b81', '#70a1ff'],
-                        borderWidth: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { position: 'right', labels: { color: '#a4b0be' } } }
-                }
-            });
-
-            const ctxBar = document.getElementById('decisionBarChart').getContext('2d');
-            barChart = new Chart(ctxBar, {
-                type: 'bar',
-                data: {
-                    labels: ['Blocked (Enforced)', 'Allowed (Benign)'],
-                    datasets: [{
-                        label: 'Requests',
-                        data: [0, 0],
-                        backgroundColor: ['#ff4757', '#2ed573'],
-                        borderRadius: 6
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        x: { ticks: { color: '#a4b0be' }, grid: { display: false } },
-                        y: { ticks: { color: '#a4b0be' }, grid: { color: 'rgba(255,255,255,0.05)' } }
-                    }
-                }
-            });
-        }
-
-        async function fetchMetrics() {
+            if (typeof Chart === 'undefined') {
+                console.warn("Chart.js library not loaded yet; charts disabled.");
+                return;
+            }
             try {
-                const res = await fetch('/api/data');
-                const data = await res.json();
-
-                document.getElementById('total-reqs').innerText = data.total_requests;
-                document.getElementById('total-blocked').innerText = data.total_blocked;
-                document.getElementById('total-allowed').innerText = data.total_allowed;
-                document.getElementById('event-count').innerText = `${data.recent_events.length} recent incidents`;
-
-                // Update Pie Chart
-                const attackTypes = data.attack_types;
-                pieChart.data.labels = Object.keys(attackTypes);
-                pieChart.data.datasets[0].data = Object.values(attackTypes);
-                pieChart.update();
-
-                // Update Bar Chart
-                barChart.data.datasets[0].data = [data.total_blocked, data.total_allowed];
-                barChart.update();
-
-                // Update Table safely with HTML escaping
-                const tbody = document.getElementById('events-tbody');
-                if (data.recent_events.length === 0) {
-                    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; color:var(--text-muted);">Waiting for security events...</td></tr>';
-                    return;
+                // Attack Pie / Doughnut Chart
+                const ctxPie = document.getElementById('attackPieChart');
+                if (ctxPie) {
+                    pieChart = new Chart(ctxPie, {
+                        type: 'doughnut',
+                        data: {
+                            labels: ['SQLi', 'XSS', 'CmdInj', 'PathTrav', 'RCE', 'Probing', 'Legitimate'],
+                            datasets: [{
+                                data: [0, 0, 0, 0, 0, 0, 0],
+                                backgroundColor: [
+                                    '#ff4757', // Red SQLi
+                                    '#fbbf24', // Amber XSS
+                                    '#3b82f6', // Blue CmdInj
+                                    '#8b5cf6', // Purple PathTrav
+                                    '#ec4899', // Pink RCE
+                                    '#06b6d4', // Cyan Probing
+                                    '#10b981'  // Green Legitimate
+                                ],
+                                borderColor: '#18181b',
+                                borderWidth: 2.5,
+                                hoverOffset: 6
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    position: 'right',
+                                    labels: {
+                                        font: { family: "'Plus Jakarta Sans', sans-serif", weight: '700', size: 11 },
+                                        color: '#18181b',
+                                        boxWidth: 14,
+                                        padding: 10
+                                    }
+                                }
+                            }
+                        }
+                    });
                 }
 
-                tbody.innerHTML = data.recent_events.map(ev => `
-                    <tr>
-                        <td class="mono">${escapeHtml(ev.timestamp.split('T')[1] || ev.timestamp)}</td>
-                        <td class="mono">${escapeHtml(ev.ip)}</td>
-                        <td class="mono" style="max-width:240px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
-                            <strong>${escapeHtml(ev.method)}</strong> ${escapeHtml(ev.uri)}
-                        </td>
-                        <td><span class="attack-tag">${escapeHtml(ev.attack_type)}</span></td>
-                        <td><span class="status-pill ${escapeHtml(ev.action.toLowerCase())}">${escapeHtml(ev.action)}</span></td>
-                        <td class="mono">${escapeHtml(ev.anomaly_score)}</td>
-                        <td class="mono" style="max-width:220px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:var(--accent-amber);" title="${escapeHtml(ev.matched_sample)}">
-                            ${escapeHtml(ev.matched_sample)}
-                        </td>
-                    </tr>
-                `).join('');
-
+                // Decision Bar Chart
+                const ctxBar = document.getElementById('decisionBarChart');
+                if (ctxBar) {
+                    barChart = new Chart(ctxBar, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Blocked (Prevent)', 'Allowed (Clean)'],
+                            datasets: [{
+                                label: 'Requests',
+                                data: [0, 0],
+                                backgroundColor: ['#ff4757', '#10b981'],
+                                borderColor: '#18181b',
+                                borderWidth: 2.5,
+                                borderRadius: 6
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: { legend: { display: false } },
+                            scales: {
+                                x: {
+                                    grid: { display: false },
+                                    ticks: { font: { family: "'Plus Jakarta Sans', sans-serif", weight: '700', size: 12 }, color: '#18181b' }
+                                },
+                                y: {
+                                    grid: { color: '#e4e4e7', lineWidth: 1.5 },
+                                    ticks: { font: { family: "'JetBrains Mono', monospace", weight: '600', size: 11 }, color: '#18181b' }
+                                }
+                            }
+                        }
+                    });
+                }
             } catch (err) {
-                console.error("Fetch error:", err);
+                console.error("Error initializing Chart.js:", err);
             }
         }
 
-        window.onload = () => {
-            initCharts();
-            fetchMetrics();
-            setInterval(fetchMetrics, 2000);
-        };
+        // Toggle stream pause
+        function togglePause() {
+            isPaused = !isPaused;
+            const statusPill = document.getElementById('live-status-pill');
+            const statusText = document.getElementById('live-status-text');
+            const pauseLabel = document.getElementById('pause-label');
+            const pauseIcon = document.getElementById('pause-icon');
+
+            if (isPaused) {
+                statusPill.classList.add('paused');
+                statusText.innerText = 'STREAM PAUSED';
+                pauseLabel.innerText = 'Resume Stream';
+                pauseIcon.innerText = '▶';
+            } else {
+                statusPill.classList.remove('paused');
+                statusText.innerText = 'LIVE TELEMETRY STREAM';
+                pauseLabel.innerText = 'Pause Stream';
+                pauseIcon.innerText = '⏸';
+                fetchMetrics(true);
+            }
+        }
+
+        // Synthesize Beep audio via Web Audio API
+        function playBeep() {
+            if (!isSoundOn) return;
+            try {
+                const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                if (!AudioCtx) return;
+                const ctx = new AudioCtx();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(880, ctx.currentTime);
+                gain.gain.setValueAtTime(0.1, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.3);
+            } catch (e) {}
+        }
+
+        function toggleSoundAlert() {
+            isSoundOn = !isSoundOn;
+            const btn = document.getElementById('btn-sound-toggle');
+            const icon = document.getElementById('sound-icon');
+            if (isSoundOn) {
+                btn.classList.add('active');
+                icon.innerText = '🔔';
+                btn.childNodes[2].nodeValue = ' Sound: On';
+                playBeep();
+            } else {
+                btn.classList.remove('active');
+                icon.innerText = '🔇';
+                btn.childNodes[2].nodeValue = ' Sound: Off';
+            }
+        }
+
+        // Action Filter selector
+        function setActionFilter(action) {
+            activeActionFilter = action;
+            document.getElementById('btn-filter-all').classList.toggle('active', action === 'ALL');
+            document.getElementById('btn-filter-blocked').classList.toggle('active', action === 'BLOCKED');
+            document.getElementById('btn-filter-allowed').classList.toggle('active', action === 'ALLOWED');
+            applyFilters();
+        }
+
+        // Main data polling function (Guaranteed to execute even if charts fail!)
+        async function fetchMetrics(force = false) {
+            if (isPaused && !force) return;
+
+            try {
+                const res = await fetch('/api/data');
+                if (!res.ok) return;
+                const data = await res.json();
+
+                // Sound notification on new blocked events
+                if (data.total_blocked > previousBlockedCount && previousBlockedCount > 0) {
+                    playBeep();
+                }
+                previousBlockedCount = data.total_blocked;
+
+                // Update Metrics Counters safely
+                const totalReqsEl = document.getElementById('metric-total');
+                const totalBlockedEl = document.getElementById('metric-blocked');
+                const totalAllowedEl = document.getElementById('metric-allowed');
+
+                if (totalReqsEl) totalReqsEl.innerText = (data.total_requests || 0).toLocaleString();
+                if (totalBlockedEl) totalBlockedEl.innerText = (data.total_blocked || 0).toLocaleString();
+                if (totalAllowedEl) totalAllowedEl.innerText = (data.total_allowed || 0).toLocaleString();
+
+                const total = data.total_requests || 1;
+                const blockPercent = (((data.total_blocked || 0) / total) * 100).toFixed(1);
+                const cleanPercent = (((data.total_allowed || 0) / total) * 100).toFixed(1);
+
+                const blockPill = document.getElementById('block-rate-pill');
+                const cleanPill = document.getElementById('clean-rate-pill');
+                const lastUpdated = document.getElementById('last-updated-tag');
+
+                if (blockPill) blockPill.innerText = `${blockPercent}% Block Rate`;
+                if (cleanPill) cleanPill.innerText = `${cleanPercent}% Clean`;
+                if (lastUpdated) lastUpdated.innerText = `Last Polled: ${new Date().toLocaleTimeString()}`;
+
+                // Update Charts safely
+                if (pieChart && data.attack_types) {
+                    const keys = Object.keys(data.attack_types);
+                    const values = Object.values(data.attack_types);
+                    pieChart.data.labels = keys;
+                    pieChart.data.datasets[0].data = values;
+                    pieChart.update();
+                    const pieTotalEl = document.getElementById('chart-pie-total');
+                    if (pieTotalEl) pieTotalEl.innerText = `${keys.length} vectors tracked`;
+                }
+
+                if (barChart) {
+                    barChart.data.datasets[0].data = [data.total_blocked || 0, data.total_allowed || 0];
+                    barChart.update();
+                }
+
+                // Store recent events & render table
+                rawEventsList = data.recent_events || [];
+                applyFilters();
+
+            } catch (err) {
+                console.error("Telemetry API fetch error:", err);
+            }
+        }
+
+        // Filtering logic
+        function applyFilters() {
+            const query = (document.getElementById('search-box').value || '').toLowerCase().trim();
+            const selectedType = document.getElementById('attack-type-select').value;
+
+            const filtered = rawEventsList.filter(ev => {
+                // Action Filter
+                if (activeActionFilter === 'BLOCKED' && ev.action !== 'BLOCKED') return false;
+                if (activeActionFilter === 'ALLOWED' && ev.action !== 'ALLOWED') return false;
+
+                // Attack Type Filter
+                if (selectedType !== 'ALL' && ev.attack_type !== selectedType) return false;
+
+                // Search Box Filter
+                if (query) {
+                    const matchIp = (ev.ip || '').toLowerCase().includes(query);
+                    const matchUri = (ev.uri || '').toLowerCase().includes(query);
+                    const matchMethod = (ev.method || '').toLowerCase().includes(query);
+                    const matchSample = (ev.matched_sample || '').toLowerCase().includes(query);
+                    const matchType = (ev.attack_type || '').toLowerCase().includes(query);
+                    if (!matchIp && !matchUri && !matchMethod && !matchSample && !matchType) return false;
+                }
+
+                return true;
+            });
+
+            renderTable(filtered);
+        }
+
+        // Render Telemetry Table
+        function renderTable(events) {
+            const tbody = document.getElementById('events-tbody');
+            const incidentLabel = document.getElementById('incident-count-label');
+            if (incidentLabel) incidentLabel.innerText = `${events.length} Incidents Displayed`;
+
+            if (!tbody) return;
+
+            if (events.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="8" style="text-align:center; padding: 30px; color: var(--text-muted); font-weight: 600;">
+                            ⚡ VeriFireWall Telemetry Active — Listening for incoming traffic...
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = events.map(ev => {
+                const isBlocked = ev.action === 'BLOCKED';
+                const rowClass = isBlocked ? 'row-blocked' : '';
+                const timeStr = ev.timestamp ? (ev.timestamp.includes('T') ? ev.timestamp.split('T')[1] : ev.timestamp) : '-';
+                const score = ev.anomaly_score || 0;
+                const scorePercent = Math.min(100, Math.max(0, (score / 1000) * 100));
+
+                return `
+                    <tr class="${rowClass}">
+                        <td class="mono" style="white-space: nowrap; font-weight: 600;">${escapeHtml(timeStr)}</td>
+                        <td class="mono" style="white-space: nowrap; font-weight: 700; color: #1e293b;">${escapeHtml(ev.ip)}</td>
+                        <td class="mono" style="max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                            <span style="font-weight: 800; color: #0284c7;">${escapeHtml(ev.method)}</span> ${escapeHtml(ev.uri)}
+                        </td>
+                        <td><span class="vector-tag">${escapeHtml(ev.attack_type)}</span></td>
+                        <td>
+                            <span class="badge-action ${isBlocked ? 'blocked' : 'allowed'}">
+                                ${isBlocked ? '🚫 BLOCKED' : '✅ ALLOWED'}
+                            </span>
+                        </td>
+                        <td>
+                            <div class="score-bar-wrap">
+                                <span class="score-num">${score}</span>
+                                <div class="score-bar">
+                                    <div class="score-bar-inner" style="width: ${scorePercent}%; background: ${isBlocked ? 'var(--neo-red)' : 'var(--neo-green)'};"></div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="sample-preview" title="${escapeHtml(ev.matched_sample)}">
+                                ${escapeHtml(ev.matched_sample)}
+                            </div>
+                        </td>
+                        <td style="text-align: center;">
+                            <button class="btn-neo" style="padding: 4px 8px; font-size: 11px;" onclick="openInspectorModal(${ev.id})">
+                                🔍 Inspect
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Modal Inspector Functions
+        function openInspectorModal(eventId) {
+            const ev = rawEventsList.find(e => e.id === eventId);
+            if (!ev) return;
+            currentModalEvent = ev;
+
+            document.getElementById('modal-id').innerText = `#EVT-${ev.id || '00'}`;
+            document.getElementById('modal-time').innerText = ev.timestamp || '-';
+            document.getElementById('modal-ip').innerText = ev.ip || '-';
+            document.getElementById('modal-action').innerText = ev.action || '-';
+            document.getElementById('modal-vector').innerText = ev.attack_type || '-';
+            document.getElementById('modal-score').innerText = `${ev.anomaly_score || 0} (${ev.threat_level || 'Normal'})`;
+            document.getElementById('modal-uri').innerText = ev.uri || '-';
+            document.getElementById('modal-sample').innerText = ev.matched_sample || 'Passed WAF Filter';
+            document.getElementById('modal-raw-json').innerText = JSON.stringify(ev, null, 2);
+
+            document.getElementById('inspector-modal').classList.add('open');
+        }
+
+        function closeInspectorModal() {
+            document.getElementById('inspector-modal').classList.remove('open');
+        }
+
+        function closeModalOnBackdrop(e) {
+            if (e.target.id === 'inspector-modal') {
+                closeInspectorModal();
+            }
+        }
+
+        // Copy raw JSON
+        function copyRawJson() {
+            if (!currentModalEvent) return;
+            navigator.clipboard.writeText(JSON.stringify(currentModalEvent, null, 2));
+            const btn = event.target;
+            const orig = btn.innerText;
+            btn.innerText = '✅ Copied!';
+            setTimeout(() => { btn.innerText = orig; }, 1500);
+        }
+
+        // Export events to CSV
+        function exportToCSV() {
+            if (rawEventsList.length === 0) return;
+            const headers = ['ID', 'Timestamp', 'IP', 'Method', 'URI', 'Action', 'Attack Type', 'Anomaly Score', 'Threat Level', 'Matched Sample'];
+            const rows = rawEventsList.map(ev => [
+                ev.id,
+                `"${ev.timestamp || ''}"`,
+                `"${ev.ip || ''}"`,
+                `"${ev.method || ''}"`,
+                `"${(ev.uri || '').replace(/"/g, '""')}"`,
+                `"${ev.action || ''}"`,
+                `"${ev.attack_type || ''}"`,
+                ev.anomaly_score || 0,
+                `"${ev.threat_level || ''}"`,
+                `"${(ev.matched_sample || '').replace(/"/g, '""')}"`
+            ]);
+
+            const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(e => e.join(','))].join('\\n');
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement('a');
+            link.setAttribute('href', encodedUri);
+            link.setAttribute('download', `verifirewall_telemetry_${Date.now()}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Keyboard shortcuts (ESC closes modal)
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeInspectorModal();
+        });
+
+        // Initialize application robustly
+        function startApp() {
+            // First fetch data immediately
+            fetchMetrics(true);
+            
+            // Try initializing charts safely
+            try {
+                initCharts();
+            } catch (e) {
+                console.error("Init charts failed safely:", e);
+            }
+            
+            // Set 2s interval polling
+            setInterval(() => fetchMetrics(), 2000);
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', startApp);
+        } else {
+            startApp();
+        }
     </script>
 </body>
 </html>

@@ -46,3 +46,25 @@
 # In source specific files
 version_vars.h
 makeself_help
+
+# Python
+__pycache__/
+*.pyc
+
+# Local runtime directories & logs
+deployment/local/appsec-*/
+deployment/local/appsec-config/waap/
+deployment/local/appsec-logs/
+deployment/local/appsec-smartsync-storage/
+deployment/local/appsec-postgres-data/
+deployment/local/appsec-data/
+
+# Build artifacts
+build/
+
+# Local agents & skill lock files
+.agents/
+.claude/
+skills-lock.json
+_debug_*
+
