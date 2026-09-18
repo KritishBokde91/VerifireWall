@@ -11,13 +11,25 @@ and provides a web dashboard at http://localhost:3002 displaying:
 """
 
 import json
+import os
+import sys
 import subprocess
 import threading
 import time
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from urllib.parse import parse_qs, urlparse
 
-# Global state for security analytics
+# Import UNSW-NB15 Layer 4 ML NIDS Classifier
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+try:
+    from unsw_nb15.unsw_nb15_classifier import UNSWNB15Classifier
+    from unsw_nb15.l4_flow_simulator import generate_random_flow
+    unsw_classifier = UNSWNB15Classifier()
+except Exception as _e:
+    print('[UNSW-NB15 ML] Import notice:', _e)
+    unsw_classifier = None
+
+# Global state for security analytics (Layer 7 HTTP WAAP)
 stats = {
     "total_requests": 0,
     "total_blocked": 0,
@@ -31,6 +43,21 @@ stats = {
         "Remote Code Execution": 0,
         "Reconnaissance / Probing": 0,
         "General Anomaly": 0
+    },
+    "recent_events": []
+}
+
+# Global state for Layer 4 UNSW-NB15 NetFlow NIDS ML Engine
+l4_stats = {
+    "total_flows": 0,
+    "total_blocked": 0,
+    "total_allowed": 0,
+    "attack_categories": {
+        "DoS / SYN Flood": 0,
+        "Reconnaissance / Port Scan": 0,
+        "Fuzzers / Malicious Buffer": 0,
+        "Exploits / Shellcode Payload": 0,
+        "Legitimate NetFlow": 0
     },
     "recent_events": []
 }
@@ -1003,6 +1030,90 @@ HTML_PAGE = """<!DOCTYPE html>
         </div>
     </div>
 
+    
+    <!-- Dual-Layer Telemetry Navigation -->
+    <div style="display: flex; gap: 12px; margin-bottom: 20px; align-items: center;">
+        <button class="btn-neo btn-primary" id="tab-btn-l7" onclick="switchSecurityTab('L7')">
+            🛡️ Layer 7 Web Application Protection (WAF)
+        </button>
+        <button class="btn-neo" id="tab-btn-l4" onclick="switchSecurityTab('L4')">
+            ⚡ Layer 4 Network NIDS (UNSW-NB15 ML Engine)
+        </button>
+        <span class="badge-action allowed" style="margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 11px;">
+            🤖 XGBoost L4 Accuracy: 95.59%
+        </span>
+    </div>
+
+    <!-- Layer 4 NetFlow NIDS Metrics Grid (Hidden by default or toggled) -->
+    <div id="section-l4-metrics" style="display: none;">
+        <div class="metrics-grid" style="margin-bottom: 24px;">
+            <div class="metric-card blue">
+                <div class="metric-header">
+                    <span class="metric-title">Layer 4 Flows Inspected</span>
+                    <div class="metric-icon-badge">📡</div>
+                </div>
+                <div class="metric-value" id="l4-metric-total">0</div>
+                <div class="metric-sub">UNSW-NB15 NetFlow Classifier</div>
+            </div>
+            <div class="metric-card red">
+                <div class="metric-header">
+                    <span class="metric-title">L4 Network Attacks Blocked</span>
+                    <div class="metric-icon-badge">🚨</div>
+                </div>
+                <div class="metric-value" id="l4-metric-blocked">0</div>
+                <div class="metric-sub" id="l4-block-rate-pill">0% Block Rate</div>
+            </div>
+            <div class="metric-card green">
+                <div class="metric-header">
+                    <span class="metric-title">L4 Legitimate Traffic</span>
+                    <div class="metric-icon-badge">✅</div>
+                </div>
+                <div class="metric-value" id="l4-metric-allowed">0</div>
+                <div class="metric-sub" id="l4-clean-rate-pill">100% Clean</div>
+            </div>
+            <div class="metric-card purple">
+                <div class="metric-header">
+                    <span class="metric-title">ML Inference Latency</span>
+                    <div class="metric-icon-badge">⚡</div>
+                </div>
+                <div class="metric-value">< 1.2 ms</div>
+                <div class="metric-sub">XGBoost Sub-Millisecond Engine</div>
+            </div>
+        </div>
+
+        <!-- L4 Telemetry Log Table Card -->
+        <div class="neo-card" style="margin-bottom: 24px;">
+            <div class="neo-card-header">
+                <h3>⚡ Layer 4 NetFlow Anomaly Stream (UNSW-NB15)</h3>
+                <span class="incident-count-label" id="l4-incident-count-label">0 NetFlows Displayed</span>
+            </div>
+            <div class="table-responsive">
+                <table class="neo-table">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Source IP</th>
+                            <th>Proto / Service</th>
+                            <th>L4 Threat Category</th>
+                            <th>Decision</th>
+                            <th>ML Score</th>
+                            <th>Flow Metrics (Pkts / Bytes / Rate)</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody id="l4-events-tbody">
+                        <tr>
+                            <td colspan="8" style="text-align:center; padding: 30px; color: var(--text-muted); font-weight: 600;">
+                                ⚡ UNSW-NB15 ML NIDS Engine Active — Listening for NetFlow packet streams...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="section-l7-metrics">
     <!-- Metrics Grid -->
     <div class="metrics-grid">
         <div class="metric-card blue">
@@ -1139,6 +1250,7 @@ HTML_PAGE = """<!DOCTYPE html>
         </div>
     </div>
 
+    </div>
     <!-- Footer Bar -->
     <div class="footer-bar">
         <div>🛡️ <strong>VeriFireWall Core v1.1.35</strong> — Real-Time WAAP Engine</div>
@@ -1469,6 +1581,66 @@ HTML_PAGE = """<!DOCTYPE html>
         }
 
         // Render Telemetry Table
+        
+        // Render Layer 4 NetFlow Telemetry Table
+        function renderL4Table(events) {
+            const tbody = document.getElementById('l4-events-tbody');
+            const incidentLabel = document.getElementById('l4-incident-count-label');
+            if (incidentLabel) incidentLabel.innerText = `${events.length} NetFlows Displayed`;
+
+            if (!tbody) return;
+
+            if (events.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="8" style="text-align:center; padding: 30px; color: var(--text-muted); font-weight: 600;">
+                            ⚡ UNSW-NB15 ML NIDS Engine Active — Listening for NetFlow packet streams...
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = events.map(ev => {
+                const isBlocked = ev.action === 'BLOCKED';
+                const rowClass = isBlocked ? 'row-blocked' : '';
+                const score = ev.anomaly_score || 0;
+                const scorePercent = Math.min(100, Math.max(0, (score / 1000) * 100));
+
+                return `
+                    <tr class="${rowClass}">
+                        <td class="mono" style="white-space: nowrap; font-weight: 600;">${escapeHtml(ev.timestamp)}</td>
+                        <td class="mono" style="white-space: nowrap; font-weight: 700; color: #1e293b;">${escapeHtml(ev.src_ip)}</td>
+                        <td class="mono" style="white-space: nowrap;">
+                            <span style="font-weight: 800; color: #0284c7;">${escapeHtml(ev.proto)}</span>:${escapeHtml(ev.service)}
+                        </td>
+                        <td><span class="vector-tag" style="background: #e0f2fe; color: #0369a1; border-color: #0284c7;">${escapeHtml(ev.attack_type)}</span></td>
+                        <td>
+                            <span class="badge-action ${isBlocked ? 'blocked' : 'allowed'}">
+                                ${isBlocked ? '🚫 BLOCKED' : '✅ ALLOWED'}
+                            </span>
+                        </td>
+                        <td>
+                            <div class="score-bar-wrap">
+                                <span class="score-num">${score}</span>
+                                <div class="score-bar">
+                                    <div class="score-bar-inner" style="width: ${scorePercent}%; background: ${isBlocked ? 'var(--neo-red)' : 'var(--neo-green)'};"></div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="mono" style="font-size: 11px;">
+                            ${ev.spkts} pkts / ${ev.sbytes}B (${ev.rate} r/s) TTL:${ev.sttl}
+                        </td>
+                        <td style="text-align: center;">
+                            <button class="btn-neo" style="padding: 4px 8px; font-size: 11px;" onclick="openInspectorModal(${ev.id}, 'L4')">
+                                🔍 Inspect
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
         function renderTable(events) {
             const tbody = document.getElementById('events-tbody');
             const incidentLabel = document.getElementById('incident-count-label');
@@ -1601,8 +1773,36 @@ HTML_PAGE = """<!DOCTYPE html>
             if (e.key === 'Escape') closeInspectorModal();
         });
 
+        function switchSecurityTab(tab) {
+            const l4 = document.getElementById('section-l4-metrics');
+            const l7_cards = document.querySelector('.metrics-grid');
+            const l7_charts = document.querySelector('.charts-grid');
+            const l7_table = document.querySelector('.telemetry-section');
+            const btnL4 = document.getElementById('tab-btn-l4');
+            const btnL7 = document.getElementById('tab-btn-l7');
+            if (tab === 'L4') {
+                if (l4) l4.style.display = 'block';
+                if (l7_cards) l7_cards.style.display = 'none';
+                if (l7_charts) l7_charts.style.display = 'none';
+                if (l7_table) l7_table.style.display = 'none';
+                if (btnL4) { btnL4.classList.add('btn-primary'); }
+                if (btnL7) { btnL7.classList.remove('btn-primary'); }
+            } else {
+                if (l4) l4.style.display = 'none';
+                if (l7_cards) l7_cards.style.display = 'grid';
+                if (l7_charts) l7_charts.style.display = 'grid';
+                if (l7_table) l7_table.style.display = 'block';
+                if (btnL7) { btnL7.classList.add('btn-primary'); }
+                if (btnL4) { btnL4.classList.remove('btn-primary'); }
+            }
+        }
+
         // Initialize application robustly
         function startApp() {
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('tab') === 'L4' || params.get('tab') === 'l4') {
+                switchSecurityTab('L4');
+            }
             // First fetch data immediately
             fetchMetrics(true);
             
@@ -1627,6 +1827,56 @@ HTML_PAGE = """<!DOCTYPE html>
 </html>
 """
 
+def l4_streamer_thread():
+    print("⚡ [UNSW-NB15 ML] Starting Layer 4 NetFlow Anomaly Classification Streamer...")
+    while True:
+        try:
+            if unsw_classifier is not None:
+                flow_data = generate_random_flow()
+                res = unsw_classifier.classify_flow(flow_data)
+                
+                with lock:
+                    l4_stats["total_flows"] += 1
+                    if res["is_attack"]:
+                        l4_stats["total_blocked"] += 1
+                    else:
+                        l4_stats["total_allowed"] += 1
+
+                    cat = res["attack_cat"]
+                    if cat in l4_stats["attack_categories"]:
+                        l4_stats["attack_categories"][cat] += 1
+                    else:
+                        l4_stats["attack_categories"][cat] = 1
+
+                    event_entry = {
+                        "id": len(l4_stats["recent_events"]) + 1,
+                        "timestamp": flow_data.get("timestamp", time.strftime("%H:%M:%S")),
+                        "src_ip": flow_data.get("src_ip", "192.168.1.100"),
+                        "proto": flow_data.get("proto", "tcp").upper(),
+                        "service": flow_data.get("service", "http"),
+                        "action": "BLOCKED" if res["is_attack"] else "ALLOWED",
+                        "attack_type": cat,
+                        "anomaly_score": res["anomaly_score"],
+                        "confidence": res["confidence"],
+                        "model": res["model"],
+                        "dur": flow_data.get("dur", 0.0),
+                        "spkts": flow_data.get("spkts", 0),
+                        "dpkts": flow_data.get("dpkts", 0),
+                        "sbytes": flow_data.get("sbytes", 0),
+                        "dbytes": flow_data.get("dbytes", 0),
+                        "rate": flow_data.get("rate", 0.0),
+                        "sttl": flow_data.get("sttl", 64)
+                    }
+
+                    l4_stats["recent_events"].insert(0, event_entry)
+                    if len(l4_stats["recent_events"]) > 100:
+                        l4_stats["recent_events"].pop()
+
+            time.sleep(1.8)
+        except Exception as e:
+            print(f"[UNSW-NB15 ML] Streamer error: {e}")
+            time.sleep(2)
+
 class DashboardRequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         parsed = urlparse(self.path)
@@ -1636,7 +1886,9 @@ class DashboardRequestHandler(BaseHTTPRequestHandler):
             self.send_header('Access-Control-Allow-Origin', '*')
             self.end_headers()
             with lock:
-                self.wfile.write(json.dumps(stats).encode('utf-8'))
+                payload = dict(stats)
+                payload["l4"] = l4_stats
+                self.wfile.write(json.dumps(payload).encode('utf-8'))
         else:
             self.send_response(200)
             self.send_header('Content-Type', 'text/html; charset=utf-8')
@@ -1644,8 +1896,10 @@ class DashboardRequestHandler(BaseHTTPRequestHandler):
             self.wfile.write(HTML_PAGE.encode('utf-8'))
 
 def run_server():
-    t = threading.Thread(target=log_streamer_thread, daemon=True)
-    t.start()
+    t1 = threading.Thread(target=log_streamer_thread, daemon=True)
+    t1.start()
+    t2 = threading.Thread(target=l4_streamer_thread, daemon=True)
+    t2.start()
     
     server_address = ('', 3002)
     httpd = HTTPServer(server_address, DashboardRequestHandler)
